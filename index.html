@@ -1,0 +1,3302 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>JordanWearStore - Loja Oficial de Roupas Jordan</title>
+<meta name="description" content="Loja oficial de camisas e calças Jordan. Encontre as melhores peças com estilo e qualidade premium.">
+<style>
+:root {
+    --primary-color: #000000;
+    --secondary-color: #e53935;
+    --accent-color: #25D366;
+    --light-gray: #f4f4f4;
+    --dark-gray: #333333;
+    --text-color: #222222;
+    --border-radius: 12px;
+    --box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    --transition: all 0.3s ease;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+body {
+    background: #f8f9fa;
+    color: var(--text-color);
+    line-height: 1.6;
+    overflow-x: hidden;
+}
+
+/* MENU HAMBURGER */
+.hamburger-menu {
+    position: fixed;
+    top: 20px;
+    left: 20px;
+    z-index: 1001;
+    background: var(--primary-color);
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    box-shadow: var(--box-shadow);
+    transition: var(--transition);
+}
+
+.hamburger-menu:hover {
+    transform: scale(1.05);
+    background: var(--dark-gray);
+}
+
+.hamburger-line {
+    width: 24px;
+    height: 2px;
+    background: white;
+    margin: 3px 0;
+    border-radius: 2px;
+    transition: var(--transition);
+}
+
+/* SIDEBAR MENU */
+.sidebar-menu {
+    position: fixed;
+    top: 0;
+    left: -320px;
+    width: 320px;
+    height: 100vh;
+    background: white;
+    z-index: 1002;
+    box-shadow: 5px 0 25px rgba(0, 0, 0, 0.15);
+    transition: left 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+}
+
+.sidebar-menu.active {
+    left: 0;
+}
+
+/* OVERLAY PARA FECHAR O MENU */
+.sidebar-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: 1001;
+    opacity: 0;
+    visibility: hidden;
+    transition: var(--transition);
+}
+
+.sidebar-overlay.active {
+    opacity: 1;
+    visibility: visible;
+}
+
+/* HEADER DO SIDEBAR */
+.sidebar-header {
+    background: var(--primary-color);
+    color: white;
+    padding: 25px 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.sidebar-header h3 {
+    font-size: 20px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.sidebar-close {
+    background: none;
+    border: none;
+    color: white;
+    font-size: 28px;
+    cursor: pointer;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    transition: var(--transition);
+}
+
+.sidebar-close:hover {
+    background: rgba(255, 255, 255, 0.1);
+    transform: rotate(90deg);
+}
+
+/* CONTEÚDO DO SIDEBAR */
+.sidebar-content {
+    flex: 1;
+    overflow-y: auto;
+    padding: 0;
+}
+
+.sidebar-nav {
+    padding: 20px 0;
+}
+
+.sidebar-item {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    padding: 18px 25px;
+    text-decoration: none;
+    color: var(--text-color);
+    font-weight: 500;
+    font-size: 16px;
+    border-left: 4px solid transparent;
+    transition: var(--transition);
+    cursor: pointer;
+}
+
+.sidebar-item:hover {
+    background: #f8f9fa;
+    border-left-color: var(--primary-color);
+    color: var(--primary-color);
+}
+
+.sidebar-item.active {
+    background: #f0f0f0;
+    border-left-color: var(--secondary-color);
+    color: var(--primary-color);
+    font-weight: 600;
+}
+
+.sidebar-icon {
+    font-size: 20px;
+    width: 24px;
+    text-align: center;
+}
+
+/* SEÇÃO CONTATO NO SIDEBAR */
+.contact-section {
+    padding: 25px;
+    background: #f8f9fa;
+    margin-top: 20px;
+    border-top: 1px solid #eee;
+}
+
+.contact-section h4 {
+    margin-bottom: 20px;
+    color: var(--primary-color);
+    font-size: 18px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.contact-info {
+    background: white;
+    padding: 15px;
+    border-radius: var(--border-radius);
+    margin-bottom: 20px;
+    box-shadow: var(--box-shadow);
+}
+
+.contact-info p {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 10px;
+    color: var(--text-color);
+}
+
+.contact-form {
+    display: none;
+}
+
+.contact-form.active {
+    display: block;
+    animation: fadeIn 0.3s ease;
+}
+
+.form-group {
+    margin-bottom: 15px;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 6px;
+    font-size: 13px;
+    color: var(--text-color);
+    font-weight: 500;
+}
+
+.form-group input,
+.form-group textarea {
+    width: 100%;
+    padding: 12px 15px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    font-size: 14px;
+    transition: var(--transition);
+}
+
+.form-group input:focus,
+.form-group textarea:focus {
+    outline: none;
+    border-color: var(--primary-color);
+    box-shadow: 0 0 0 3px rgba(0, 0, 0, 0.05);
+}
+
+.form-group textarea {
+    resize: vertical;
+    min-height: 100px;
+}
+
+.recaptcha-container {
+    background: #f8f9fa;
+    padding: 15px;
+    border-radius: 8px;
+    margin: 20px 0;
+    text-align: center;
+    border: 1px solid #e0e0e0;
+}
+
+.recaptcha-checkbox {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    justify-content: center;
+    margin-bottom: 10px;
+    cursor: pointer;
+}
+
+.recaptcha-checkbox input {
+    width: 18px;
+    height: 18px;
+}
+
+.recaptcha-text {
+    font-size: 12px;
+    color: #666;
+    line-height: 1.4;
+}
+
+.submit-contact-btn {
+    width: 100%;
+    padding: 14px;
+    background: var(--accent-color);
+    color: white;
+    border: none;
+    border-radius: var(--border-radius);
+    font-weight: bold;
+    cursor: pointer;
+    font-size: 15px;
+    transition: var(--transition);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+}
+
+.submit-contact-btn:hover {
+    background: #1da851;
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(37, 211, 102, 0.3);
+}
+
+/* HEADER MELHORADO */
+header {
+    background: var(--primary-color);
+    color: white;
+    padding: 16px 24px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+.logo-container {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.logo {
+    font-weight: bold;
+    font-size: 24px;
+    color: white;
+    letter-spacing: 1px;
+}
+
+.logo span {
+    color: var(--secondary-color);
+}
+
+.cart-icon {
+    position: absolute;
+    right: 24px;
+    cursor: pointer;
+    font-size: 24px;
+    padding: 8px;
+    border-radius: 50%;
+    transition: var(--transition);
+}
+
+.cart-icon:hover {
+    background: rgba(255, 255, 255, 0.1);
+    transform: scale(1.05);
+}
+
+.cart-count {
+    position: absolute;
+    top: -5px;
+    right: -5px;
+    background: var(--secondary-color);
+    color: white;
+    border-radius: 50%;
+    width: 22px;
+    height: 22px;
+    font-size: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+}
+
+/* BANNER CORRIGIDO */
+.banner-container {
+    width: 100%;
+    overflow: hidden;
+    position: relative;
+    height: 500px;
+    margin-bottom: 30px;
+}
+
+@media (max-width: 768px) {
+    .banner-container {
+        height: 300px;
+    }
+}
+
+.banner-slide {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    opacity: 0;
+    transition: opacity 0.8s ease;
+    object-fit: cover;
+}
+
+.banner-slide.active {
+    opacity: 1;
+}
+
+.banner-dots {
+    position: absolute;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    gap: 10px;
+}
+
+.banner-dot {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.5);
+    border: none;
+    cursor: pointer;
+    transition: var(--transition);
+}
+
+.banner-dot.active {
+    background: white;
+    transform: scale(1.2);
+}
+
+/* HOME SECTION - AGORA COM TODOS OS PRODUTOS */
+.home-section {
+    padding: 0 20px;
+    max-width: 1200px;
+    margin: 0 auto 50px;
+}
+
+.home-intro {
+    text-align: center;
+    padding: 40px 20px;
+    margin-bottom: 40px;
+}
+
+.home-intro h1 {
+    font-size: 36px;
+    margin-bottom: 20px;
+    color: var(--primary-color);
+}
+
+.home-intro p {
+    font-size: 18px;
+    color: #666;
+    max-width: 800px;
+    margin: 0 auto;
+    line-height: 1.6;
+}
+
+.features-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 25px;
+    margin: 40px 0;
+}
+
+.feature-card {
+    background: white;
+    padding: 30px 20px;
+    border-radius: var(--border-radius);
+    box-shadow: var(--box-shadow);
+    transition: var(--transition);
+}
+
+.feature-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+}
+
+.feature-icon {
+    font-size: 40px;
+    margin-bottom: 15px;
+}
+
+.feature-card h3 {
+    margin-bottom: 10px;
+    color: var(--primary-color);
+}
+
+/* FILTROS SIMPLIFICADOS */
+.filters {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 40px 0 25px;
+    flex-wrap: wrap;
+    gap: 15px;
+}
+
+.search-box {
+    flex: 1;
+    min-width: 250px;
+    position: relative;
+}
+
+.search-input {
+    width: 100%;
+    padding: 12px 20px 12px 45px;
+    border: 2px solid #e0e0e0;
+    border-radius: var(--border-radius);
+    font-size: 14px;
+    transition: var(--transition);
+    background: white;
+}
+
+.search-input:focus {
+    outline: none;
+    border-color: var(--primary-color);
+    box-shadow: 0 0 0 3px rgba(0, 0, 0, 0.1);
+}
+
+.search-icon {
+    position: absolute;
+    left: 15px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #777;
+}
+
+.sort-select {
+    padding: 12px 20px;
+    border: 2px solid #e0e0e0;
+    border-radius: var(--border-radius);
+    font-size: 14px;
+    background: white;
+    cursor: pointer;
+    transition: var(--transition);
+}
+
+.sort-select:focus {
+    outline: none;
+    border-color: var(--primary-color);
+}
+
+/* CATEGORY TABS - REMOVIDAS */
+/* AS TABS FORAM REMOVIDAS - TODOS OS PRODUTOS ESTÃO NA HOME */
+
+/* PRODUCTS GRID MELHORADO */
+.products-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    gap: 25px;
+    padding: 10px;
+}
+
+@media (max-width: 768px) {
+    .products-grid {
+        grid-template-columns: repeat(auto-fill, minmax(170px, 1fr));
+        gap: 15px;
+    }
+}
+
+@media (max-width: 480px) {
+    .products-grid {
+        grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+        gap: 12px;
+    }
+}
+
+/* PRODUCT CARD MELHORADO */
+.product-card {
+    background: white;
+    border-radius: var(--border-radius);
+    overflow: hidden;
+    position: relative;
+    cursor: pointer;
+    transition: var(--transition);
+    height: 380px;
+    box-shadow: var(--box-shadow);
+}
+
+.product-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+}
+
+.product-image-container {
+    width: 100%;
+    height: 200px;
+    overflow: hidden;
+    position: relative;
+}
+
+.product-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.5s ease;
+}
+
+.product-card:hover .product-image {
+    transform: scale(1.05);
+}
+
+.product-badge {
+    position: absolute;
+    top: 12px;
+    right: 12px;
+    background: var(--secondary-color);
+    color: white;
+    padding: 4px 10px;
+    border-radius: 20px;
+    font-size: 11px;
+    font-weight: bold;
+    z-index: 2;
+}
+
+.product-info {
+    padding: 15px;
+}
+
+.product-name {
+    font-size: 15px;
+    font-weight: 600;
+    margin-bottom: 8px;
+    color: var(--text-color);
+    line-height: 1.4;
+    height: 42px;
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+}
+
+.product-price {
+    font-size: 18px;
+    font-weight: bold;
+    color: var(--primary-color);
+    margin-bottom: 8px;
+}
+
+.product-price span {
+    font-size: 14px;
+    color: #666;
+    text-decoration: line-through;
+    margin-left: 5px;
+}
+
+/* STOCK INFO MELHORADO */
+.stock-info {
+    display: inline-block;
+    padding: 4px 10px;
+    border-radius: 15px;
+    font-size: 11px;
+    font-weight: bold;
+    margin-bottom: 12px;
+}
+
+.stock-high { 
+    background: #e8f6ef;
+    color: #27ae60;
+}
+
+.stock-medium { 
+    background: #fef9e7;
+    color: #f39c12;
+}
+
+.stock-low { 
+    background: #fdedec;
+    color: #e74c3c;
+}
+
+.stock-out { 
+    background: #f2f3f4;
+    color: #7f8c8d;
+}
+
+/* PRODUCT BUTTONS */
+.product-buttons {
+    display: flex;
+    gap: 8px;
+    margin-top: 10px;
+}
+
+.product-btn {
+    padding: 10px;
+    border: none;
+    border-radius: 8px;
+    font-weight: 600;
+    cursor: pointer;
+    font-size: 13px;
+    transition: var(--transition);
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 5px;
+}
+
+.buy-btn {
+    background: var(--primary-color);
+    color: white;
+}
+
+.buy-btn:hover {
+    background: var(--dark-gray);
+    transform: translateY(-2px);
+}
+
+.details-btn {
+    background: #f0f0f0;
+    color: var(--text-color);
+}
+
+.details-btn:hover {
+    background: #e0e0e0;
+    transform: translateY(-2px);
+}
+
+.disabled-btn {
+    background: #bdc3c7;
+    color: white;
+    cursor: not-allowed;
+}
+
+/* MODAL DE DETALHES MELHORADO */
+.details-modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+    background: rgba(0, 0, 0, 0.95);
+    z-index: 2000;
+    display: none;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+    animation: fadeIn 0.3s ease;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+.details-modal.active {
+    display: flex;
+}
+
+.details-content {
+    background: white;
+    border-radius: 16px;
+    max-width: 900px;
+    width: 100%;
+    max-height: 90vh;
+    overflow-y: auto;
+    animation: slideUp 0.4s ease;
+}
+
+@keyframes slideUp {
+    from { opacity: 0; transform: translateY(30px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+/* CARROSSEL MELHORADO */
+.image-carousel {
+    position: relative;
+    width: 100%;
+    height: 400px;
+    overflow: hidden;
+    border-radius: 16px 16px 0 0;
+}
+
+@media (max-width: 768px) {
+    .image-carousel {
+        height: 300px;
+    }
+}
+
+.carousel-images {
+    display: flex;
+    transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+    height: 100%;
+}
+
+.carousel-image {
+    min-width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.carousel-controls {
+    position: absolute;
+    top: 50%;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    transform: translateY(-50%);
+    padding: 0 20px;
+    pointer-events: none;
+}
+
+.carousel-btn {
+    background: rgba(0, 0, 0, 0.7);
+    color: white;
+    border: none;
+    width: 45px;
+    height: 45px;
+    border-radius: 50%;
+    cursor: pointer;
+    font-size: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: var(--transition);
+    pointer-events: all;
+}
+
+.carousel-btn:hover {
+    background: rgba(0, 0, 0, 0.9);
+    transform: scale(1.1);
+}
+
+.carousel-indicators {
+    position: absolute;
+    bottom: 20px;
+    left: 0;
+    right: 0;
+    display: flex;
+    justify-content: center;
+    gap: 8px;
+}
+
+.carousel-indicator {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.6);
+    border: none;
+    cursor: pointer;
+    padding: 0;
+    transition: var(--transition);
+}
+
+.carousel-indicator.active {
+    background: white;
+    transform: scale(1.3);
+}
+
+.image-thumbnails {
+    display: flex;
+    gap: 10px;
+    margin: 15px;
+    padding: 10px;
+    overflow-x: auto;
+    background: #f8f9fa;
+    border-radius: 10px;
+}
+
+.thumbnail {
+    width: 70px;
+    height: 70px;
+    object-fit: cover;
+    border-radius: 8px;
+    cursor: pointer;
+    border: 2px solid transparent;
+    transition: var(--transition);
+    flex-shrink: 0;
+}
+
+.thumbnail.active {
+    border-color: var(--primary-color);
+    transform: scale(1.05);
+}
+
+.thumbnail:hover {
+    opacity: 0.8;
+    border-color: var(--primary-color);
+}
+
+/* DETALHES DO PRODUTO */
+.product-details {
+    padding: 25px;
+}
+
+.product-details h2 {
+    font-size: 24px;
+    margin-bottom: 10px;
+    color: var(--text-color);
+}
+
+.product-details-price {
+    font-size: 28px;
+    font-weight: bold;
+    color: var(--primary-color);
+    margin: 15px 0;
+}
+
+.product-description {
+    color: #555;
+    line-height: 1.7;
+    margin: 20px 0;
+    font-size: 15px;
+}
+
+.product-specs {
+    margin: 20px 0;
+    padding: 15px;
+    background: #f8f9fa;
+    border-radius: 10px;
+}
+
+.product-specs h4 {
+    margin-bottom: 10px;
+    color: var(--text-color);
+}
+
+.specs-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10px;
+}
+
+.spec-item {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 14px;
+}
+
+.spec-item i {
+    color: var(--primary-color);
+}
+
+/* BOTÃO FECHAR MODAL */
+.close-modal {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    background: rgba(0, 0, 0, 0.7);
+    color: white;
+    border: none;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    font-size: 24px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 10;
+    transition: var(--transition);
+}
+
+.close-modal:hover {
+    background: rgba(0, 0, 0, 0.9);
+    transform: rotate(90deg);
+}
+
+/* CART MODAL MELHORADO */
+.cart-modal {
+    position: fixed;
+    top: 0;
+    right: -100%;
+    width: 100%;
+    max-width: 450px;
+    height: 100vh;
+    background: white;
+    transition: right 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    z-index: 1000;
+    display: flex;
+    flex-direction: column;
+    box-shadow: -5px 0 25px rgba(0, 0, 0, 0.1);
+}
+
+.cart-modal.active {
+    right: 0;
+}
+
+.cart-header {
+    padding: 20px;
+    background: var(--primary-color);
+    color: white;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.cart-header h3 {
+    font-size: 18px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.cart-close {
+    background: none;
+    border: none;
+    color: white;
+    font-size: 28px;
+    cursor: pointer;
+    transition: var(--transition);
+}
+
+.cart-close:hover {
+    transform: scale(1.1);
+}
+
+.cart-items {
+    flex: 1;
+    overflow-y: auto;
+    padding: 20px;
+}
+
+.empty-cart {
+    text-align: center;
+    padding: 40px 20px;
+    color: #666;
+}
+
+.empty-cart i {
+    font-size: 50px;
+    margin-bottom: 15px;
+    color: #ddd;
+}
+
+.cart-item {
+    display: flex;
+    gap: 15px;
+    padding: 15px 0;
+    border-bottom: 1px solid #eee;
+    align-items: center;
+}
+
+.cart-item:last-child {
+    border-bottom: none;
+}
+
+.cart-item-image {
+    width: 70px;
+    height: 70px;
+    object-fit: cover;
+    border-radius: 8px;
+    flex-shrink: 0;
+}
+
+.cart-item-details {
+    flex: 1;
+}
+
+.cart-item-name {
+    font-weight: 600;
+    font-size: 14px;
+    margin-bottom: 5px;
+    line-height: 1.4;
+}
+
+.cart-item-price {
+    font-weight: bold;
+    color: var(--primary-color);
+    font-size: 14px;
+}
+
+.cart-item-actions {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-top: 8px;
+}
+
+.quantity-control {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    background: #f8f9fa;
+    padding: 4px 10px;
+    border-radius: 20px;
+}
+
+.quantity-btn {
+    width: 26px;
+    height: 26px;
+    border: none;
+    background: white;
+    border-radius: 50%;
+    cursor: pointer;
+    font-size: 14px;
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    transition: var(--transition);
+}
+
+.quantity-btn:hover {
+    background: var(--primary-color);
+    color: white;
+}
+
+.remove-item {
+    background: none;
+    border: none;
+    color: #e74c3c;
+    cursor: pointer;
+    font-size: 13px;
+    padding: 5px 10px;
+    border-radius: 5px;
+    transition: var(--transition);
+}
+
+.remove-item:hover {
+    background: #ffebee;
+}
+
+.cart-footer {
+    padding: 20px;
+    border-top: 2px solid #f0f0f0;
+    background: #fafafa;
+}
+
+.cart-summary {
+    margin-bottom: 20px;
+}
+
+.summary-row {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 8px;
+    font-size: 14px;
+    color: #555;
+}
+
+.summary-row.total {
+    font-size: 18px;
+    font-weight: bold;
+    color: var(--primary-color);
+    margin-top: 10px;
+    padding-top: 10px;
+    border-top: 1px solid #eee;
+}
+
+.checkout-button {
+    width: 100%;
+    padding: 16px;
+    background: var(--accent-color);
+    color: white;
+    border: none;
+    border-radius: var(--border-radius);
+    font-weight: bold;
+    cursor: pointer;
+    font-size: 16px;
+    transition: var(--transition);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+}
+
+.checkout-button:hover {
+    background: #1da851;
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(37, 211, 102, 0.3);
+}
+
+.clear-cart-btn {
+    width: 100%;
+    padding: 12px;
+    background: #95a5a6;
+    color: white;
+    border: none;
+    border-radius: var(--border-radius);
+    font-weight: bold;
+    cursor: pointer;
+    font-size: 14px;
+    transition: var(--transition);
+    margin-top: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+}
+
+.clear-cart-btn:hover {
+    background: #7f8c8d;
+}
+
+/* CHECKOUT MODAL MELHORADO */
+.checkout-modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+    background: rgba(0, 0, 0, 0.9);
+    z-index: 2000;
+    display: none;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+}
+
+.checkout-modal.active {
+    display: flex;
+}
+
+.checkout-container {
+    background: white;
+    border-radius: 16px;
+    max-width: 500px;
+    width: 100%;
+    max-height: 90vh;
+    overflow-y: auto;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
+}
+
+.checkout-header {
+    padding: 20px;
+    background: var(--primary-color);
+    color: white;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-radius: 16px 16px 0 0;
+    position: sticky;
+    top: 0;
+    z-index: 1;
+}
+
+.checkout-close {
+    background: none;
+    border: none;
+    color: white;
+    font-size: 28px;
+    cursor: pointer;
+    transition: var(--transition);
+}
+
+.checkout-close:hover {
+    transform: scale(1.1);
+}
+
+.checkout-form {
+    padding: 25px;
+}
+
+.checkout-form .form-group {
+    margin-bottom: 20px;
+}
+
+.checkout-form .form-group label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: 600;
+    color: var(--text-color);
+    font-size: 14px;
+}
+
+.checkout-form .form-group input,
+.checkout-form .form-group textarea,
+.checkout-form .form-group select {
+    width: 100%;
+    padding: 14px;
+    border: 2px solid #e0e0e0;
+    border-radius: var(--border-radius);
+    font-size: 14px;
+    transition: var(--transition);
+    background: white;
+}
+
+.checkout-form .form-group input:focus,
+.checkout-form .form-group textarea:focus,
+.checkout-form .form-group select:focus {
+    outline: none;
+    border-color: var(--primary-color);
+    box-shadow: 0 0 0 3px rgba(0, 0, 0, 0.1);
+}
+
+.checkout-form .form-group textarea {
+    resize: vertical;
+    min-height: 100px;
+}
+
+.payment-methods,
+.delivery-options {
+    display: grid;
+    gap: 10px;
+    margin-top: 10px;
+}
+
+.payment-option,
+.delivery-option {
+    padding: 15px;
+    border: 2px solid #e0e0e0;
+    border-radius: var(--border-radius);
+    cursor: pointer;
+    transition: var(--transition);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.payment-option:hover,
+.delivery-option:hover {
+    border-color: var(--primary-color);
+}
+
+.payment-option.active,
+.delivery-option.active {
+    border-color: var(--accent-color);
+    background: rgba(37, 211, 102, 0.05);
+}
+
+.payment-icon {
+    font-size: 20px;
+}
+
+.order-summary {
+    background: #f8f9fa;
+    padding: 20px;
+    border-radius: var(--border-radius);
+    margin: 20px 0;
+}
+
+.order-summary h4 {
+    margin-bottom: 15px;
+    color: var(--text-color);
+}
+
+.order-item {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 8px;
+    font-size: 14px;
+}
+
+.order-total {
+    display: flex;
+    justify-content: space-between;
+    font-weight: bold;
+    font-size: 18px;
+    margin-top: 12px;
+    padding-top: 12px;
+    border-top: 2px solid #ddd;
+    color: var(--primary-color);
+}
+
+.submit-order-btn {
+    width: 100%;
+    padding: 16px;
+    background: var(--accent-color);
+    color: white;
+    border: none;
+    border-radius: var(--border-radius);
+    font-weight: bold;
+    cursor: pointer;
+    font-size: 16px;
+    transition: var(--transition);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    margin-top: 20px;
+}
+
+.submit-order-btn:hover {
+    background: #1da851;
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(37, 211, 102, 0.3);
+}
+
+/* NOTIFICAÇÃO MELHORADA */
+.notification {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    background: var(--primary-color);
+    color: white;
+    padding: 16px 24px;
+    border-radius: var(--border-radius);
+    z-index: 9999;
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.2);
+    animation: slideInRight 0.3s ease, slideOutRight 0.3s ease 2.7s;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    max-width: 350px;
+}
+
+@keyframes slideInRight {
+    from { transform: translateX(100%); opacity: 0; }
+    to { transform: translateX(0); opacity: 1; }
+}
+
+@keyframes slideOutRight {
+    from { transform: translateX(0); opacity: 1; }
+    to { transform: translateX(100%); opacity: 0; }
+}
+
+.notification.success {
+    background: #27ae60;
+}
+
+.notification.error {
+    background: #e74c3c;
+}
+
+.notification.warning {
+    background: #f39c12;
+}
+
+.notification-icon {
+    font-size: 20px;
+}
+
+/* LOADING SPINNER */
+.spinner {
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    border: 3px solid rgba(255, 255, 255, 0.3);
+    border-radius: 50%;
+    border-top-color: white;
+    animation: spin 1s ease-in-out infinite;
+}
+
+@keyframes spin {
+    to { transform: rotate(360deg); }
+}
+
+/* FOOTER */
+footer {
+    background: var(--primary-color);
+    color: white;
+    padding: 40px 20px;
+    text-align: center;
+    margin-top: 50px;
+}
+
+.footer-content {
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.footer-logo {
+    font-size: 24px;
+    font-weight: bold;
+    margin-bottom: 20px;
+}
+
+.footer-logo span {
+    color: var(--secondary-color);
+}
+
+.footer-text {
+    color: #bbb;
+    margin-bottom: 30px;
+    max-width: 600px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.footer-bottom {
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    padding-top: 20px;
+    color: #999;
+    font-size: 14px;
+}
+
+/* RESPONSIVE ADJUSTMENTS */
+@media (max-width: 768px) {
+    header {
+        padding: 12px 16px;
+    }
+    
+    .logo {
+        font-size: 20px;
+    }
+    
+    .hamburger-menu {
+        top: 15px;
+        left: 15px;
+        width: 45px;
+        height: 45px;
+    }
+    
+    .sidebar-menu {
+        width: 280px;
+    }
+    
+    .product-card {
+        height: 340px;
+    }
+    
+    .product-image-container {
+        height: 160px;
+    }
+    
+    .product-name {
+        font-size: 13px;
+        height: 36px;
+    }
+    
+    .product-price {
+        font-size: 16px;
+    }
+    
+    .product-btn {
+        padding: 8px;
+        font-size: 12px;
+    }
+    
+    .details-content {
+        max-height: 95vh;
+    }
+    
+    .product-details {
+        padding: 20px;
+    }
+    
+    .product-details h2 {
+        font-size: 20px;
+    }
+    
+    .banner-container {
+        height: 300px;
+    }
+    
+    .home-intro h1 {
+        font-size: 28px;
+    }
+    
+    .home-intro p {
+        font-size: 16px;
+    }
+}
+
+@media (max-width: 480px) {
+    .products-grid {
+        grid-template-columns: 1fr 1fr;
+    }
+    
+    .product-card {
+        height: 320px;
+    }
+    
+    .product-image-container {
+        height: 140px;
+    }
+    
+    .search-box {
+        min-width: 100%;
+    }
+    
+    .filters {
+        flex-direction: column;
+        align-items: stretch;
+    }
+    
+    .cart-modal {
+        max-width: 100%;
+    }
+    
+    .sidebar-menu {
+        width: 100%;
+        left: -100%;
+    }
+    
+    .banner-container {
+        height: 200px;
+    }
+}
+
+/* SCROLLBAR CUSTOM */
+::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+}
+
+::-webkit-scrollbar-track {
+    background: #f1f1f1;
+    border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb {
+    background: #c1c1c1;
+    border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: #a8a8a8;
+}
+</style>
+</head>
+
+<body>
+
+<!-- MENU HAMBURGER -->
+<div class="hamburger-menu" onclick="toggleSidebar()">
+    <div class="hamburger-line"></div>
+    <div class="hamburger-line"></div>
+    <div class="hamburger-line"></div>
+</div>
+
+<!-- OVERLAY DO SIDEBAR -->
+<div class="sidebar-overlay" onclick="toggleSidebar()"></div>
+
+<!-- SIDEBAR MENU -->
+<div class="sidebar-menu" id="sidebarMenu">
+    <div class="sidebar-header">
+        <h3>📁 Menu</h3>
+        <button class="sidebar-close" onclick="toggleSidebar()">×</button>
+    </div>
+    
+    <div class="sidebar-content">
+        <nav class="sidebar-nav">
+            <a class="sidebar-item active" onclick="navigateTo('home')">
+                <span class="sidebar-icon">🏠</span>
+                <span>Início</span>
+            </a>
+            <a class="sidebar-item" onclick="navigateTo('products')">
+                <span class="sidebar-icon">👕</span>
+                <span>Todos os Produtos</span>
+            </a>
+            <a class="sidebar-item" onclick="showContactForm()">
+                <span class="sidebar-icon">📞</span>
+                <span>Contato</span>
+            </a>
+        </nav>
+        
+        <div class="contact-section">
+            <h4><span>📞</span> Contato</h4>
+            
+            <div class="contact-info" id="contactInfo">
+                <p><strong>📱 Telefone/WhatsApp:</strong></p>
+                <p>+55 51 8187-5780</p>
+                <p style="margin-top: 15px;"><strong>⏰ Horário de Atendimento:</strong></p>
+                <p>Segunda a Sexta: 9h às 18h</p>
+                <p>Sábado: 9h às 13h</p>
+                <button class="submit-contact-btn" onclick="showContactForm()" style="margin-top: 15px; background: var(--primary-color);">
+                    📩 Enviar Mensagem
+                </button>
+            </div>
+            
+            <div class="contact-form" id="contactForm">
+                <div class="form-group">
+                    <label for="contactName">Nome Completo *</label>
+                    <input type="text" id="contactName" placeholder="Digite seu nome completo">
+                </div>
+                
+                <div class="form-group">
+                    <label for="contactEmail">E-mail *</label>
+                    <input type="email" id="contactEmail" placeholder="seuemail@exemplo.com">
+                </div>
+                
+                <div class="form-group">
+                    <label for="contactPhone">Telefone</label>
+                    <input type="tel" id="contactPhone" placeholder="(00) 00000-0000">
+                </div>
+                
+                <div class="form-group">
+                    <label for="contactMessage">Mensagem *</label>
+                    <textarea id="contactMessage" placeholder="Digite sua mensagem..."></textarea>
+                </div>
+                
+                <div class="recaptcha-container">
+                    <div class="recaptcha-checkbox">
+                        <input type="checkbox" id="robotCheck">
+                        <label for="robotCheck">Não sou um robô</label>
+                    </div>
+                    <div class="recaptcha-text">
+                        Esta verificação é necessária para evitar spam.
+                    </div>
+                </div>
+                
+                <button class="submit-contact-btn" onclick="sendContactMessage()">
+                    📤 Enviar Mensagem
+                </button>
+                
+                <button class="submit-contact-btn" onclick="showContactInfo()" style="margin-top: 10px; background: #95a5a6;">
+                    ↩️ Voltar
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<header>
+    <div class="logo-container">
+        <div class="logo">Jordan<span>Wear</span>Store</div>
+    </div>
+    <div class="cart-icon" onclick="toggleCart()" title="Abrir carrinho">
+        🛒
+        <span class="cart-count">0</span>
+    </div>
+</header>
+
+<!-- HOME SECTION - AGORA COM TODOS OS PRODUTOS -->
+<section class="home-section" id="homeSection">
+    <div class="home-intro">
+        <h1>Bem-vindo à JordanWearStore</h1>
+        <p>Encontre as melhores camisas e calças Jordan com qualidade premium e estilo inigualável. Nossa coleção exclusiva combina conforto, durabilidade e o design icônico da marca.</p>
+    </div>
+    
+    <!-- BANNER CORRIGIDO -->
+    <div class="banner-container">
+        <img src="https://i.pinimg.com/736x/82/21/f4/8221f40a9e4e84aec32443e0130f5cc6.jpg" class="banner-slide active" alt="Coleção Jordan 2024">
+        <img src="https://i.pinimg.com/736x/47/9c/46/479c46d2e3a13214638a3d80d9ef2cd3.jpg" class="banner-slide" alt="Nova Coleção de Camisas">
+        <img src="https://i.pinimg.com/736x/55/e8/60/55e8602476052c3b9e3383840c3b3741.jpg" class="banner-slide" alt="Promoção Especial">
+        <div class="banner-dots">
+            <button class="banner-dot active" onclick="goToBannerSlide(0)"></button>
+            <button class="banner-dot" onclick="goToBannerSlide(1)"></button>
+            <button class="banner-dot" onclick="goToBannerSlide(2)"></button>
+        </div>
+    </div>
+    
+    <div class="features-grid">
+        <div class="feature-card">
+            <div class="feature-icon">🚚</div>
+            <h3>Entrega Rápida</h3>
+            <p>Entrega em todo o Brasil com opções expressas disponíveis</p>
+        </div>
+        <div class="feature-card">
+            <div class="feature-icon">🏷️</div>
+            <h3>Preços Especiais</h3>
+            <p>Os melhores preços do mercado com qualidade garantida</p>
+        </div>
+        <div class="feature-card">
+            <div class="feature-icon">🛡️</div>
+            <h3>Garantia</h3>
+            <p>Todos os produtos possuem garantia de qualidade e originalidade</p>
+        </div>
+    </div>
+    
+    <!-- FILTROS E TODOS OS PRODUTOS -->
+    <div class="filters">
+        <div class="search-box">
+            <div class="search-icon">🔍</div>
+            <input type="text" class="search-input" id="searchInput" placeholder="Buscar produtos..." oninput="searchProducts()">
+        </div>
+        <select class="sort-select" id="sortSelect" onchange="sortProducts()">
+            <option value="default">Ordenar por: Padrão</option>
+            <option value="price-asc">Preço: Menor para Maior</option>
+            <option value="price-desc">Preço: Maior para Menor</option>
+            <option value="name-asc">Nome: A-Z</option>
+            <option value="stock">Mais em Estoque</option>
+        </select>
+    </div>
+    
+    <!-- TODOS OS PRODUTOS - CAMISAS E CALÇAS JUNTAS -->
+    <div class="products-grid" id="allProducts">
+        <!-- Produtos serão carregados via JavaScript -->
+    </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+    <div class="footer-content">
+        <div class="footer-logo">Jordan<span>Wear</span>Store</div>
+        <p class="footer-text">Loja oficial de roupas Jordan. Oferecemos as melhores camisas e calças com qualidade premium e estilo inigualável.</p>
+        <div class="footer-bottom">
+            &copy; 2024 JordanWearStore. Todos os direitos reservados.
+        </div>
+    </div>
+</footer>
+
+<!-- MODAL DE DETALHES -->
+<div class="details-modal" id="detailsModal">
+    <!-- Conteúdo será preenchido pelo JavaScript -->
+</div>
+
+<!-- CARRINHO -->
+<div class="cart-modal" id="cartModal">
+    <div class="cart-header">
+        <h3>🛒 Meu Carrinho</h3>
+        <button class="cart-close" onclick="toggleCart()">×</button>
+    </div>
+    <div class="cart-items" id="cartItems">
+        <div class="empty-cart">
+            <div>🛍️</div>
+            <p>Seu carrinho está vazio</p>
+            <p style="font-size: 14px; margin-top: 10px;">Adicione produtos para continuar</p>
+        </div>
+    </div>
+    <div class="cart-footer">
+        <div class="cart-summary" id="cartSummary" style="display: none;">
+            <div class="summary-row">
+                <span>Subtotal</span>
+                <span id="cartSubtotal">R$ 0,00</span>
+            </div>
+            <div class="summary-row">
+                <span>Frete</span>
+                <span id="cartShipping">R$ 9,90</span>
+            </div>
+            <div class="summary-row total">
+                <span>Total</span>
+                <span id="cartTotal">R$ 0,00</span>
+            </div>
+        </div>
+        <button class="checkout-button" onclick="openCheckout()" id="checkoutBtn" style="display: none;">
+            📱 Finalizar Pedido
+        </button>
+        <button class="clear-cart-btn" onclick="clearCart()" id="clearCartBtn" style="display: none;">
+            🗑️ Limpar Carrinho
+        </button>
+    </div>
+</div>
+
+<!-- MODAL DE CHECKOUT -->
+<div class="checkout-modal" id="checkoutModal">
+    <div class="checkout-container">
+        <div class="checkout-header">
+            <h3>📋 Finalizar Pedido</h3>
+            <button class="checkout-close" onclick="closeCheckout()">×</button>
+        </div>
+        <div class="checkout-form" id="checkoutForm"></div>
+    </div>
+</div>
+
+<script>
+// ============================================
+// DADOS DOS PRODUTOS (37 PRODUTOS)
+// ============================================
+
+const produtos = [
+    // ======================================
+    // CAMISAS - 18 PRODUTOS
+    // ======================================
+    {
+        id: 'camisa1',
+        nome: 'Camisa Jordan Air Classic',
+        categoria: 'camisas',
+        preco: 299.9,
+        estoque: 25,
+        imagem: 'https://images.unsplash.com/photo-1594032194509-0056023973b2?w=300&h=300&fit=crop',
+        imagens: [
+            'https://images.unsplash.com/photo-1594032194509-0056023973b2?w=300&h=300&fit=crop',
+            'https://images.unsplash.com/photo-1594032194509-0056023973b2?w=300&h=300&fit=crop'
+        ],
+        descricao: 'Camisa clássica da linha Air Jordan com tecido premium e design icônico'
+    },
+    {
+        id: 'camisa2',
+        nome: 'Camisa Jordan Retro 23',
+        categoria: 'camisas',
+        preco: 289.9,
+        estoque: 2,
+        imagem: 'https://images.unsplash.com/photo-1516826957135-700dedea698c?w=300&h=300&fit=crop',
+        imagens: [],
+        descricao: 'Design retrô inspirado nos anos 90 com logo bordado'
+    },
+    {
+        id: 'camisa3',
+        nome: 'Camisa Jordan Performance',
+        categoria: 'camisas',
+        preco: 329.9,
+        estoque: 12,
+        imagem: 'https://images.unsplash.com/photo-1596755094514-f87e34085b2c?w=300&h=300&fit=crop',
+        imagens: [],
+        descricao: 'Tecnologia de alta performance para atividades esportivas'
+    },
+    {
+        id: 'camisa4',
+        nome: 'Camisa Jordan Signature',
+        categoria: 'camisas',
+        preco: 349.9,
+        estoque: 8,
+        imagem: 'https://images.unsplash.com/photo-1529374255404-311a2a4f1fd9?w=300&h=300&fit=crop',
+        imagens: [],
+        descricao: 'Edição especial com assinatura bordada e detalhes premium'
+    },
+    {
+        id: 'camisa5',
+        nome: 'Camisa Jordan Street Style',
+        categoria: 'camisas',
+        preco: 269.9,
+        estoque: 15,
+        imagem: 'https://images.unsplash.com/photo-1574180045827-681f8a1a9622?w=300&h=300&fit=crop',
+        imagens: [],
+        descricao: 'Estilo urbano com design moderno e conforto máximo'
+    },
+    {
+        id: 'camisa6',
+        nome: 'Camisa Jordan Essentials',
+        categoria: 'camisas',
+        preco: 199.9,
+        estoque: 30,
+        imagem: 'https://images.unsplash.com/photo-1551028719-00167b16eac5?w=300&h=300&fit=crop',
+        imagens: [],
+        descricao: 'Básica essencial para o dia a dia, super confortável'
+    },
+    {
+        id: 'camisa7',
+        nome: 'Camisa Jordan Pro Elite',
+        categoria: 'camisas',
+        preco: 379.9,
+        estoque: 5,
+        imagem: 'https://images.unsplash.com/photo-1594032194509-0056023973b2?w=300&h=300&fit=crop',
+        imagens: [],
+        descricao: 'Linha profissional com materiais de alta qualidade'
+    },
+    {
+        id: 'camisa8',
+        nome: 'Camisa Jordan Night Game',
+        categoria: 'camisas',
+        preco: 319.9,
+        estoque: 22,
+        imagem: 'https://images.unsplash.com/photo-1523381210434-271e8be1f52b?w=300&h=300&fit=crop',
+        imagens: [],
+        descricao: 'Design elegante para jogos noturnos e eventos especiais'
+    },
+    {
+        id: 'camisa9',
+        nome: 'Camisa Jordan Summer Edition',
+        categoria: 'camisas',
+        preco: 239.9,
+        estoque: 14,
+        imagem: 'https://images.unsplash.com/photo-1544441893-675973e31985?w=300&h=300&fit=crop',
+        imagens: [],
+        descricao: 'Edição verão com tecido leve e respirabilidade máxima'
+    },
+    {
+        id: 'camisa10',
+        nome: 'Camisa Jordan Limited Edition',
+        categoria: 'camisas',
+        preco: 459.9,
+        estoque: 3,
+        imagem: 'https://images.unsplash.com/photo-1503342394128-c104d54dba01?w=300&h=300&fit=crop',
+        imagens: [],
+        descricao: 'Edição limitada numerada, apenas 100 unidades produzidas'
+    },
+    {
+        id: 'camisa11',
+        nome: 'Camisa Jordan Air Max Pro',
+        categoria: 'camisas',
+        preco: 329.9,
+        estoque: 20,
+        imagem: 'https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?w=300&h=300&fit=crop',
+        imagens: [],
+        descricao: 'Tecnologia Air Max para máximo conforto e estilo'
+    },
+    {
+        id: 'camisa12',
+        nome: 'Camisa Jordan Urban Flex',
+        categoria: 'camisas',
+        preco: 279.9,
+        estoque: 16,
+        imagem: 'https://images.unsplash.com/photo-1529374255404-311a2a4f1fd9?w=300&h=300&fit=crop',
+        imagens: [],
+        descricao: 'Flexibilidade urbana com design contemporâneo'
+    },
+    {
+        id: 'camisa13',
+        nome: 'Camisa Jordan Court Vision',
+        categoria: 'camisas',
+        preco: 299.9,
+        estoque: 11,
+        imagem: 'https://images.unsplash.com/photo-1552374196-1ab2a1c593e8?w=300&h=300&fit=crop',
+        imagens: [],
+        descricao: 'Inspirada nas quadras com estilo esportivo moderno'
+    },
+    {
+        id: 'camisa14',
+        nome: 'Camisa Jordan Heritage',
+        categoria: 'camisas',
+        preco: 349.9,
+        estoque: 7,
+        imagem: 'https://images.unsplash.com/photo-1551028719-00167b16eac5?w=300&h=300&fit=crop',
+        imagens: [],
+        descricao: 'Herança Jordan com detalhes clássicos e modernos'
+    },
+    {
+        id: 'camisa15',
+        nome: 'Camisa Jordan Bounce',
+        categoria: 'camisas',
+        preco: 269.9,
+        estoque: 19,
+        imagem: 'https://images.unsplash.com/photo-1594032194509-0056023973b2?w=300&h=300&fit=crop',
+        imagens: [],
+        descricao: 'Tecnologia Bounce para liberdade de movimento'
+    },
+    {
+        id: 'camisa16',
+        nome: 'Camisa Jordan React',
+        categoria: 'camisas',
+        preco: 389.9,
+        estoque: 9,
+        imagem: 'https://images.unsplash.com/photo-1523381210434-271e8be1f52b?w=300&h=300&fit=crop',
+        imagens: [],
+        descricao: 'Conforto React com resposta energética premium'
+    },
+    {
+        id: 'camisa17',
+        nome: 'Camisa Jordan Zoom',
+        categoria: 'camisas',
+        preco: 319.9,
+        estoque: 13,
+        imagem: 'https://images.unsplash.com/photo-1544441893-675973e31985?w=300&h=300&fit=crop',
+        imagens: [],
+        descricao: 'Tecnologia Zoom para velocidade e agilidade'
+    },
+    {
+        id: 'camisa18',
+        nome: 'Camisa Jordan FlyEase',
+        categoria: 'camisas',
+        preco: 279.9,
+        estoque: 21,
+        imagem: 'https://images.unsplash.com/photo-1503342394128-c104d54dba01?w=300&h=300&fit=crop',
+        imagens: [],
+        descricao: 'Sistema FlyEase para fácil uso e máximo conforto'
+    },
+    
+    // ======================================
+    // CALÇAS - 18 PRODUTOS
+    // ======================================
+    {
+        id: 'calca1',
+        nome: 'Calça Jeans Jordan Classic',
+        categoria: 'calcas',
+        preco: 389.9,
+        estoque: 20,
+        imagem: 'https://images.unsplash.com/photo-1581349488280-6f2a3eb2a1f2?w=300&h=300&fit=crop',
+        imagens: [],
+        descricao: 'Jeans clássico com elastano para máximo conforto'
+    },
+    {
+        id: 'calca2',
+        nome: 'Calça Cargo Jordan Utility',
+        categoria: 'calcas',
+        preco: 329.9,
+        estoque: 15,
+        imagem: 'https://images.unsplash.com/photo-1593032465171-72c54d44c0a6?w=300&h=300&fit=crop',
+        imagens: [],
+        descricao: 'Cargo prática com múltiplos bolsos e design utilitário'
+    },
+    {
+        id: 'calca3',
+        nome: 'Calça Moletom Jordan Comfort',
+        categoria: 'calcas',
+        preco: 279.9,
+        estoque: 25,
+        imagem: 'https://images.unsplash.com/photo-1624378439575-d8705ad7ae80?w=300&h=300&fit=crop',
+        imagens: [],
+        descricao: 'Moletom ultra confortável para relaxar em estilo'
+    },
+    {
+        id: 'calca4',
+        nome: 'Calça Chino Jordan Executive',
+        categoria: 'calcas',
+        preco: 349.9,
+        estoque: 18,
+        imagem: 'https://images.unsplash.com/photo-1582418702059-97ebafb35d09?w=300&h=300&fit=crop',
+        imagens: [],
+        descricao: 'Chino executivo para ocasiões formais e casuais'
+    },
+    {
+        id: 'calca5',
+        nome: 'Calça Jogger Jordan Sport',
+        categoria: 'calcas',
+        preco: 299.9,
+        estoque: 22,
+        imagem: 'https://images.unsplash.com/photo-1473966968600-fa801b869a1a?w=300&h=300&fit=crop',
+        imagens: [],
+        descricao: 'Jogger esportiva com ajuste perfeito e mobilidade'
+    },
+    {
+        id: 'calca6',
+        nome: 'Calça Social Jordan Premium',
+        categoria: 'calcas',
+        preco: 429.9,
+        estoque: 10,
+        imagem: 'https://images.unsplash.com/photo-1542272604-787c3835535d?w=300&h=300&fit=crop',
+        imagens: [],
+        descricao: 'Social premium com corte italiano e tecido de alta qualidade'
+    },
+    {
+        id: 'calca7',
+        nome: 'Calça Tactel Jordan Performance',
+        categoria: 'calcas',
+        preco: 319.9,
+        estoque: 12,
+        imagem: 'https://images.unsplash.com/photo-1475178626620-a4d074967452?w=300&h=300&fit=crop',
+        imagens: [],
+        descricao: 'Tactel de performance para atividades físicas intensas'
+    },
+    {
+        id: 'calca8',
+        nome: 'Calça Wide Leg Jordan',
+        categoria: 'calcas',
+        preco: 369.9,
+        estoque: 8,
+        imagem: 'https://images.unsplash.com/photo-1576995853123-5a10305d93c0?w=300&h=300&fit=crop',
+        imagens: [],
+        descricao: 'Wide leg fashion com corte moderno e tendência streetwear'
+    },
+    {
+        id: 'calca9',
+        nome: 'Calça Linho Jordan Summer',
+        categoria: 'calcas',
+        preco: 289.9,
+        estoque: 16,
+        imagem: 'https://images.unsplash.com/photo-1594633312681-425c7b97ccd1?w=300&h=300&fit=crop',
+        imagens: [],
+        descricao: 'Linho leve e respirável para os dias mais quentes'
+    },
+    {
+        id: 'calca10',
+        nome: 'Calça Couro Jordan Urban',
+        categoria: 'calcas',
+        preco: 599.9,
+        estoque: 1,
+        imagem: 'https://images.unsplash.com/photo-1552374196-c4e7ffc6e126?w=300&h=300&fit=crop',
+        imagens: [],
+        descricao: 'Couro legítimo com design urbano e estilo ousado'
+    },
+    {
+        id: 'calca11',
+        nome: 'Calça Sarja Jordan Slim',
+        categoria: 'calcas',
+        preco: 339.9,
+        estoque: 17,
+        imagem: 'https://images.unsplash.com/photo-1581349488280-6f2a3eb2a1f2?w=300&h=300&fit=crop',
+        imagens: [],
+        descricao: 'Sarja slim fit com corte moderno e ajuste perfeito'
+    },
+    {
+        id: 'calca12',
+        nome: 'Calça Tactel Jordan Active',
+        categoria: 'calcas',
+        preco: 299.9,
+        estoque: 14,
+        imagem: 'https://images.unsplash.com/photo-1593032465171-72c54d44c0a6?w=300&h=300&fit=crop',
+        imagens: [],
+        descricao: 'Tactel para atividades físicas com máxima liberdade'
+    },
+    {
+        id: 'calca13',
+        nome: 'Calça Moletom Jordan Tech',
+        categoria: 'calcas',
+        preco: 319.9,
+        estoque: 11,
+        imagem: 'https://images.unsplash.com/photo-1624378439575-d8705ad7ae80?w=300&h=300&fit=crop',
+        imagens: [],
+        descricao: 'Moletom tech fleece com tecnologia térmica avançada'
+    },
+    {
+        id: 'calca14',
+        nome: 'Calça Jeans Jordan Skinny',
+        categoria: 'calcas',
+        preco: 379.9,
+        estoque: 9,
+        imagem: 'https://images.unsplash.com/photo-1582418702059-97ebafb35d09?w=300&h=300&fit=crop',
+        imagens: [],
+        descricao: 'Jeans skinny fit com elastano e corte moderno'
+    },
+    {
+        id: 'calca15',
+        nome: 'Calça Cargo Jordan Military',
+        categoria: 'calcas',
+        preco: 349.9,
+        estoque: 13,
+        imagem: 'https://images.unsplash.com/photo-1473966968600-fa801b869a1a?w=300&h=300&fit=crop',
+        imagens: [],
+        descricao: 'Cargo estilo militar com múltiplos bolsos funcionais'
+    },
+    {
+        id: 'calca16',
+        nome: 'Calça Sarja Jordan Regular',
+        categoria: 'calcas',
+        preco: 289.9,
+        estoque: 19,
+        imagem: 'https://images.unsplash.com/photo-1542272604-787c3835535d?w=300&h=300&fit=crop',
+        imagens: [],
+        descricao: 'Sarja regular fit para uso casual e confortável'
+    },
+    {
+        id: 'calca17',
+        nome: 'Calça Tactel Jordan Pro',
+        categoria: 'calcas',
+        preco: 359.9,
+        estoque: 7,
+        imagem: 'https://images.unsplash.com/photo-1475178626620-a4d074967452?w=300&h=300&fit=crop',
+        imagens: [],
+        descricao: 'Tactel profissional para alto rendimento esportivo'
+    },
+    {
+        id: 'calca18',
+        nome: 'Calça Jeans Jordan Relaxed',
+        categoria: 'calcas',
+        preco: 329.9,
+        estoque: 15,
+        imagem: 'https://images.unsplash.com/photo-1576995853123-5a10305d93c0?w=300&h=300&fit=crop',
+        imagens: [],
+        descricao: 'Jeans relaxed fit para máximo conforto no dia a dia'
+    }
+];
+
+// ============================================
+// VARIÁVEIS GLOBAIS
+// ============================================
+
+let carrinho = [];
+let clienteInfo = {
+    nome: '', telefone: '', email: '', endereco: '',
+    pagamento: 'pix', entrega: 'padrao', observacoes: ''
+};
+
+let currentCarouselIndex = 0;
+let currentProductId = '';
+let autoScrollInterval;
+let bannerInterval;
+let currentSection = 'home';
+
+// ============================================
+// FUNÇÕES DE INICIALIZAÇÃO
+// ============================================
+
+document.addEventListener('DOMContentLoaded', function() {
+    console.log('JordanWearStore inicializado com', produtos.length, 'produtos');
+    renderAllProducts();
+    startBannerRotation();
+    loadCart();
+    setupEventListeners();
+    updateCartDisplay();
+});
+
+function setupEventListeners() {
+    // Event delegation para botões dos produtos
+    document.addEventListener('click', function(e) {
+        const buyBtn = e.target.closest('.buy-btn');
+        const detailsBtn = e.target.closest('.details-btn');
+        
+        if (buyBtn) {
+            const productId = buyBtn.dataset.id;
+            if (productId) addToCart(productId);
+        }
+        
+        if (detailsBtn) {
+            const productId = detailsBtn.dataset.id;
+            if (productId) showProductDetails(productId);
+        }
+    });
+    
+    // Fechar modais com ESC
+    document.addEventListener('keydown', function(e) {
+        if (e.key === 'Escape') closeAllModals();
+    });
+    
+    // Fechar modais clicando fora
+    document.addEventListener('click', function(e) {
+        if (e.target.classList.contains('details-modal')) {
+            closeModal('detailsModal');
+        }
+        if (e.target.classList.contains('checkout-modal')) {
+            closeCheckout();
+        }
+        if (e.target.classList.contains('sidebar-overlay')) {
+            toggleSidebar();
+        }
+    });
+}
+
+// ============================================
+// FUNÇÕES DO MENU LATERAL
+// ============================================
+
+function toggleSidebar() {
+    const sidebar = document.getElementById('sidebarMenu');
+    const overlay = document.querySelector('.sidebar-overlay');
+    const hamburger = document.querySelector('.hamburger-menu');
+    
+    sidebar.classList.toggle('active');
+    overlay.classList.toggle('active');
+    
+    if (sidebar.classList.contains('active')) {
+        hamburger.style.opacity = '0.7';
+    } else {
+        hamburger.style.opacity = '1';
+    }
+}
+
+function navigateTo(section) {
+    if (section === 'products') {
+        // Rola até os produtos
+        window.scrollTo({
+            top: document.querySelector('.filters').offsetTop - 100,
+            behavior: 'smooth'
+        });
+    } else {
+        // Rola até o topo
+        window.scrollTo({
+            top: 0,
+            behavior: 'smooth'
+        });
+    }
+    
+    toggleSidebar();
+    updateSidebarActiveItem(section);
+}
+
+function updateSidebarActiveItem(section) {
+    document.querySelectorAll('.sidebar-item').forEach(item => {
+        item.classList.remove('active');
+    });
+    
+    const items = document.querySelectorAll('.sidebar-item');
+    switch(section) {
+        case 'home':
+            items[0].classList.add('active');
+            break;
+        case 'products':
+            items[1].classList.add('active');
+            break;
+        case 'contato':
+            items[2].classList.add('active');
+            break;
+    }
+}
+
+function showContactForm() {
+    document.getElementById('contactInfo').style.display = 'none';
+    document.getElementById('contactForm').classList.add('active');
+    updateSidebarActiveItem('contato');
+}
+
+function showContactInfo() {
+    document.getElementById('contactInfo').style.display = 'block';
+    document.getElementById('contactForm').classList.remove('active');
+}
+
+function sendContactMessage() {
+    const name = document.getElementById('contactName').value.trim();
+    const email = document.getElementById('contactEmail').value.trim();
+    const phone = document.getElementById('contactPhone').value.trim();
+    const message = document.getElementById('contactMessage').value.trim();
+    const robotCheck = document.getElementById('robotCheck').checked;
+    
+    // Validação
+    if (!name || !email || !message) {
+        showNotification('Preencha todos os campos obrigatórios!', 'error');
+        return;
+    }
+    
+    if (!robotCheck) {
+        showNotification('Marque a verificação "Não sou um robô"!', 'error');
+        return;
+    }
+    
+    // Validar email
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailRegex.test(email)) {
+        showNotification('Digite um e-mail válido!', 'error');
+        return;
+    }
+    
+    // Criar mensagem para WhatsApp
+    let whatsappMessage = `*NOVA MENSAGEM DO SITE - JordanWearStore*\n\n`;
+    whatsappMessage += `*Nome:* ${name}\n`;
+    whatsappMessage += `*E-mail:* ${email}\n`;
+    if (phone) whatsappMessage += `*Telefone:* ${phone}\n`;
+    whatsappMessage += `\n*Mensagem:*\n${message}\n\n`;
+    whatsappMessage += `📅 *Data:* ${new Date().toLocaleString('pt-BR')}`;
+    
+    // Codificar mensagem
+    const encodedMessage = encodeURIComponent(whatsappMessage);
+    const phoneNumber = '555181875780';
+    const whatsappURL = `https://wa.me/${phoneNumber}?text=${encodedMessage}`;
+    
+    // Abrir WhatsApp
+    window.open(whatsappURL, '_blank');
+    
+    // Limpar formulário
+    document.getElementById('contactName').value = '';
+    document.getElementById('contactEmail').value = '';
+    document.getElementById('contactPhone').value = '';
+    document.getElementById('contactMessage').value = '';
+    document.getElementById('robotCheck').checked = false;
+    
+    // Mostrar confirmação
+    showContactInfo();
+    showNotification('Mensagem enviada com sucesso! Verifique o WhatsApp.', 'success');
+}
+
+// ============================================
+// RENDERIZAÇÃO DE TODOS OS PRODUTOS NA HOME
+// ============================================
+
+function renderAllProducts() {
+    const container = document.getElementById('allProducts');
+    if (!container) return;
+    
+    let html = '';
+    
+    produtos.forEach(produto => {
+        const stockClass = getStockClass(produto.estoque);
+        const stockText = getStockText(produto.estoque);
+        const hasDiscount = produto.precoOriginal && produto.precoOriginal > produto.preco;
+        
+        html += `
+        <div class="product-card">
+            ${produto.estoque <= 3 && produto.estoque > 0 ? 
+                `<div class="product-badge">ÚLTIMAS UNIDADES</div>` : 
+                produto.estoque === 0 ? 
+                `<div class="product-badge" style="background:#7f8c8d">ESGOTADO</div>` :
+                hasDiscount ? `<div class="product-badge">PROMOÇÃO</div>` : ''
+            }
+            <div class="product-image-container">
+                <img src="${produto.imagem}" alt="${produto.nome}" class="product-image" loading="lazy">
+            </div>
+            <div class="product-info">
+                <h3 class="product-name">${produto.nome}</h3>
+                <div class="product-price">
+                    R$ ${produto.preco.toFixed(2).replace('.', ',')}
+                    ${hasDiscount ? `<span>R$ ${produto.precoOriginal.toFixed(2).replace('.', ',')}</span>` : ''}
+                </div>
+                <div class="stock-info ${stockClass}">${stockText}</div>
+                <div class="product-buttons">
+                    ${produto.estoque > 0 ? 
+                        `<button class="product-btn buy-btn" data-id="${produto.id}">
+                            🛒 Comprar
+                        </button>` :
+                        `<button class="product-btn disabled-btn" disabled>
+                            🔴 Esgotado
+                        </button>`
+                    }
+                    <button class="product-btn details-btn" data-id="${produto.id}">
+                        👀 Detalhes
+                    </button>
+                </div>
+            </div>
+        </div>
+        `;
+    });
+    
+    container.innerHTML = html;
+}
+
+function getStockClass(estoque) {
+    if (estoque === 0) return 'stock-out';
+    if (estoque <= 3) return 'stock-low';
+    if (estoque <= 10) return 'stock-medium';
+    return 'stock-high';
+}
+
+function getStockText(estoque) {
+    if (estoque === 0) return 'ESGOTADO';
+    if (estoque <= 3) return `ÚLTIMAS ${estoque} UNIDADES`;
+    if (estoque <= 10) return 'ESTOQUE BAIXO';
+    return 'EM ESTOQUE';
+}
+
+// ============================================
+// SISTEMA DE BUSCA E FILTRO
+// ============================================
+
+function searchProducts() {
+    const searchTerm = document.getElementById('searchInput').value.toLowerCase().trim();
+    const container = document.getElementById('allProducts');
+    
+    if (searchTerm === '') {
+        container.innerHTML = '';
+        renderAllProducts();
+        return;
+    }
+    
+    const filtered = produtos.filter(p => 
+        p.nome.toLowerCase().includes(searchTerm) ||
+        p.descricao.toLowerCase().includes(searchTerm) ||
+        p.categoria.toLowerCase().includes(searchTerm)
+    );
+    
+    let html = '';
+    
+    if (filtered.length === 0) {
+        html = '<p style="grid-column:1/-1; text-align:center; padding:40px; color:#666; font-size:18px;">Nenhum produto encontrado. Tente outra busca.</p>';
+    } else {
+        filtered.forEach(produto => {
+            const stockClass = getStockClass(produto.estoque);
+            const stockText = getStockText(produto.estoque);
+            const hasDiscount = produto.precoOriginal && produto.precoOriginal > produto.preco;
+            
+            html += `
+            <div class="product-card">
+                ${produto.estoque <= 3 && produto.estoque > 0 ? 
+                    `<div class="product-badge">ÚLTIMAS UNIDADES</div>` : 
+                    produto.estoque === 0 ? 
+                    `<div class="product-badge" style="background:#7f8c8d">ESGOTADO</div>` :
+                    hasDiscount ? `<div class="product-badge">PROMOÇÃO</div>` : ''
+                }
+                <div class="product-image-container">
+                    <img src="${produto.imagem}" alt="${produto.nome}" class="product-image" loading="lazy">
+                </div>
+                <div class="product-info">
+                    <h3 class="product-name">${produto.nome}</h3>
+                    <div class="product-price">
+                        R$ ${produto.preco.toFixed(2).replace('.', ',')}
+                        ${hasDiscount ? `<span>R$ ${produto.precoOriginal.toFixed(2).replace('.', ',')}</span>` : ''}
+                    </div>
+                    <div class="stock-info ${stockClass}">${stockText}</div>
+                    <div class="product-buttons">
+                        ${produto.estoque > 0 ? 
+                            `<button class="product-btn buy-btn" data-id="${produto.id}">
+                                🛒 Comprar
+                            </button>` :
+                            `<button class="product-btn disabled-btn" disabled>
+                                🔴 Esgotado
+                            </button>`
+                        }
+                        <button class="product-btn details-btn" data-id="${produto.id}">
+                            👀 Detalhes
+                        </button>
+                    </div>
+                </div>
+            </div>
+            `;
+        });
+    }
+    
+    container.innerHTML = html;
+}
+
+function sortProducts() {
+    const sortBy = document.getElementById('sortSelect').value;
+    const container = document.getElementById('allProducts');
+    
+    let sortedProducts = [...produtos];
+    
+    switch(sortBy) {
+        case 'price-asc':
+            sortedProducts.sort((a, b) => a.preco - b.preco);
+            break;
+        case 'price-desc':
+            sortedProducts.sort((a, b) => b.preco - a.preco);
+            break;
+        case 'name-asc':
+            sortedProducts.sort((a, b) => a.nome.localeCompare(b.nome));
+            break;
+        case 'stock':
+            sortedProducts.sort((a, b) => b.estoque - a.estoque);
+            break;
+        case 'default':
+            // Mantém ordem original
+            break;
+    }
+    
+    let html = '';
+    
+    sortedProducts.forEach(produto => {
+        const stockClass = getStockClass(produto.estoque);
+        const stockText = getStockText(produto.estoque);
+        const hasDiscount = produto.precoOriginal && produto.precoOriginal > produto.preco;
+        
+        html += `
+        <div class="product-card">
+            ${produto.estoque <= 3 && produto.estoque > 0 ? 
+                `<div class="product-badge">ÚLTIMAS UNIDADES</div>` : 
+                produto.estoque === 0 ? 
+                `<div class="product-badge" style="background:#7f8c8d">ESGOTADO</div>` :
+                hasDiscount ? `<div class="product-badge">PROMOÇÃO</div>` : ''
+            }
+            <div class="product-image-container">
+                <img src="${produto.imagem}" alt="${produto.nome}" class="product-image" loading="lazy">
+            </div>
+            <div class="product-info">
+                <h3 class="product-name">${produto.nome}</h3>
+                <div class="product-price">
+                    R$ ${produto.preco.toFixed(2).replace('.', ',')}
+                    ${hasDiscount ? `<span>R$ ${produto.precoOriginal.toFixed(2).replace('.', ',')}</span>` : ''}
+                </div>
+                <div class="stock-info ${stockClass}">${stockText}</div>
+                <div class="product-buttons">
+                    ${produto.estoque > 0 ? 
+                        `<button class="product-btn buy-btn" data-id="${produto.id}">
+                            🛒 Comprar
+                        </button>` :
+                        `<button class="product-btn disabled-btn" disabled>
+                            🔴 Esgotado
+                        </button>`
+                    }
+                    <button class="product-btn details-btn" data-id="${produto.id}">
+                        👀 Detalhes
+                    </button>
+                </div>
+            </div>
+        </div>
+        `;
+    });
+    
+    container.innerHTML = html;
+}
+
+// ============================================
+// BANNER ROTATIVO CORRIGIDO
+// ============================================
+
+function startBannerRotation() {
+    const banners = document.querySelectorAll('.banner-slide');
+    const dots = document.querySelectorAll('.banner-dot');
+    
+    if (banners.length === 0) return;
+    
+    let current = 0;
+    
+    function showSlide(index) {
+        banners.forEach((banner, i) => {
+            banner.classList.remove('active');
+            dots[i].classList.remove('active');
+        });
+        
+        banners[index].classList.add('active');
+        dots[index].classList.add('active');
+        current = index;
+    }
+    
+    function nextSlide() {
+        const nextIndex = (current + 1) % banners.length;
+        showSlide(nextIndex);
+    }
+    
+    showSlide(0);
+    bannerInterval = setInterval(nextSlide, 5000);
+}
+
+function goToBannerSlide(index) {
+    const banners = document.querySelectorAll('.banner-slide');
+    const dots = document.querySelectorAll('.banner-dot');
+    
+    if (index >= 0 && index < banners.length) {
+        banners.forEach((banner, i) => {
+            banner.classList.remove('active');
+            dots[i].classList.remove('active');
+        });
+        
+        banners[index].classList.add('active');
+        dots[index].classList.add('active');
+        
+        // Reiniciar intervalo
+        clearInterval(bannerInterval);
+        bannerInterval = setInterval(() => {
+            const currentIndex = Array.from(banners).findIndex(b => b.classList.contains('active'));
+            const nextIndex = (currentIndex + 1) % banners.length;
+            goToBannerSlide(nextIndex);
+        }, 5000);
+    }
+}
+
+// ============================================
+// SISTEMA DE CARRINHO
+// ============================================
+
+function saveCart() {
+    localStorage.setItem('jordanwear_cart_v2', JSON.stringify(carrinho));
+}
+
+function loadCart() {
+    try {
+        const saved = localStorage.getItem('jordanwear_cart_v2');
+        if (saved) {
+            carrinho = JSON.parse(saved);
+            
+            // Validar estoque
+            carrinho = carrinho.filter(item => {
+                const produto = produtos.find(p => p.id === item.id);
+                if (!produto) return false;
+                
+                if (item.quantidade > produto.estoque) {
+                    item.quantidade = produto.estoque;
+                    if (item.quantidade === 0) return false;
+                }
+                return true;
+            });
+            
+            saveCart();
+            updateCartDisplay();
+            console.log('Carrinho carregado:', carrinho.length, 'itens');
+        }
+    } catch (e) {
+        console.error('Erro ao carregar carrinho:', e);
+        carrinho = [];
+    }
+}
+
+function addToCart(productId) {
+    const produto = produtos.find(p => p.id === productId);
+    if (!produto || produto.estoque === 0) {
+        showNotification('Produto esgotado!', 'error');
+        return;
+    }
+    
+    const itemIndex = carrinho.findIndex(item => item.id === productId);
+    
+    if (itemIndex > -1) {
+        if (carrinho[itemIndex].quantidade < produto.estoque) {
+            carrinho[itemIndex].quantidade++;
+        } else {
+            showNotification('Quantidade máxima em estoque!', 'warning');
+            return;
+        }
+    } else {
+        carrinho.push({
+            id: productId,
+            nome: produto.nome,
+            preco: produto.preco,
+            quantidade: 1,
+            imagem: produto.imagem
+        });
+    }
+    
+    saveCart();
+    updateCartDisplay();
+    showNotification(`${produto.nome} adicionado ao carrinho!`, 'success');
+}
+
+function updateCartDisplay() {
+    const cartCount = document.querySelector('.cart-count');
+    const cartItems = document.getElementById('cartItems');
+    const cartSummary = document.getElementById('cartSummary');
+    const checkoutBtn = document.getElementById('checkoutBtn');
+    const clearCartBtn = document.getElementById('clearCartBtn');
+    
+    // Atualizar contador
+    const totalItems = carrinho.reduce((sum, item) => sum + item.quantidade, 0);
+    cartCount.textContent = totalItems;
+    
+    if (carrinho.length === 0) {
+        cartItems.innerHTML = `
+            <div class="empty-cart">
+                <div>🛍️</div>
+                <p>Seu carrinho está vazio</p>
+                <p style="font-size: 14px; margin-top: 10px;">Adicione produtos para continuar</p>
+            </div>
+        `;
+        cartSummary.style.display = 'none';
+        checkoutBtn.style.display = 'none';
+        clearCartBtn.style.display = 'none';
+        return;
+    }
+    
+    // Mostrar elementos do carrinho
+    cartSummary.style.display = 'block';
+    checkoutBtn.style.display = 'flex';
+    clearCartBtn.style.display = 'flex';
+    
+    // Calcular totais
+    const subtotal = carrinho.reduce((sum, item) => sum + (item.preco * item.quantidade), 0);
+    const frete = 9.90;
+    const total = subtotal + frete;
+    
+    // Atualizar resumo
+    document.getElementById('cartSubtotal').textContent = `R$ ${subtotal.toFixed(2).replace('.', ',')}`;
+    document.getElementById('cartShipping').textContent = `R$ ${frete.toFixed(2).replace('.', ',')}`;
+    document.getElementById('cartTotal').textContent = `R$ ${total.toFixed(2).replace('.', ',')}`;
+    
+    // Renderizar itens
+    let html = '';
+    carrinho.forEach(item => {
+        const itemTotal = item.preco * item.quantidade;
+        
+        html += `
+        <div class="cart-item">
+            <img src="${item.imagem}" alt="${item.nome}" class="cart-item-image">
+            <div class="cart-item-details">
+                <div class="cart-item-name">${item.nome}</div>
+                <div class="cart-item-price">R$ ${itemTotal.toFixed(2).replace('.', ',')}</div>
+                <div class="cart-item-actions">
+                    <div class="quantity-control">
+                        <button class="quantity-btn" onclick="updateCartItem('${item.id}', -1)">-</button>
+                        <span style="font-weight: bold;">${item.quantidade}</span>
+                        <button class="quantity-btn" onclick="updateCartItem('${item.id}', 1)">+</button>
+                    </div>
+                    <button class="remove-item" onclick="removeFromCart('${item.id}')">Remover</button>
+                </div>
+            </div>
+        </div>
+        `;
+    });
+    
+    cartItems.innerHTML = html;
+}
+
+function updateCartItem(productId, change) {
+    const itemIndex = carrinho.findIndex(item => item.id === productId);
+    if (itemIndex === -1) return;
+    
+    const item = carrinho[itemIndex];
+    const produto = produtos.find(p => p.id === productId);
+    
+    if (!produto) return;
+    
+    const newQuantity = item.quantidade + change;
+    
+    if (newQuantity < 1) {
+        carrinho.splice(itemIndex, 1);
+        showNotification('Item removido do carrinho', 'warning');
+    } else if (newQuantity > produto.estoque) {
+        showNotification('Quantidade máxima em estoque!', 'warning');
+        return;
+    } else {
+        carrinho[itemIndex].quantidade = newQuantity;
+    }
+    
+    saveCart();
+    updateCartDisplay();
+}
+
+function removeFromCart(productId) {
+    const itemIndex = carrinho.findIndex(item => item.id === productId);
+    if (itemIndex > -1) {
+        carrinho.splice(itemIndex, 1);
+        saveCart();
+        updateCartDisplay();
+        showNotification('Item removido do carrinho', 'warning');
+    }
+}
+
+function clearCart() {
+    if (carrinho.length === 0) {
+        showNotification('Carrinho já está vazio!', 'warning');
+        return;
+    }
+    
+    if (confirm('Tem certeza que deseja limpar todo o carrinho?')) {
+        carrinho = [];
+        saveCart();
+        updateCartDisplay();
+        showNotification('Carrinho limpo com sucesso!', 'success');
+    }
+}
+
+function toggleCart() {
+    const cartModal = document.getElementById('cartModal');
+    cartModal.classList.toggle('active');
+    document.body.style.overflow = cartModal.classList.contains('active') ? 'hidden' : '';
+}
+
+// ============================================
+// MODAL DE DETALHES DO PRODUTO
+// ============================================
+
+function showProductDetails(productId) {
+    const produto = produtos.find(p => p.id === productId);
+    if (!produto) return;
+    
+    currentProductId = productId;
+    currentCarouselIndex = 0;
+    
+    const modal = document.getElementById('detailsModal');
+    const stockClass = getStockClass(produto.estoque);
+    const stockText = getStockText(produto.estoque);
+    const hasDiscount = produto.precoOriginal && produto.precoOriginal > produto.preco;
+    
+    // Carrossel de imagens
+    const carouselHTML = produto.imagens && produto.imagens.length > 0 ? `
+        <div class="image-carousel">
+            <div class="carousel-images" id="carouselImages">
+                ${produto.imagens.map((img, index) => `
+                    <img src="${img}" class="carousel-image" data-index="${index}" loading="lazy">
+                `).join('')}
+            </div>
+            
+            <div class="carousel-controls">
+                <button class="carousel-btn" onclick="prevImage()">‹</button>
+                <button class="carousel-btn" onclick="nextImage()">›</button>
+            </div>
+            
+            <div class="carousel-indicators" id="carouselIndicators">
+                ${produto.imagens.map((_, index) => `
+                    <button class="carousel-indicator ${index === 0 ? 'active' : ''}" 
+                            onclick="goToImage(${index})"></button>
+                `).join('')}
+            </div>
+        </div>
+    ` : '';
+    
+    // Miniaturas
+    const thumbnailsHTML = produto.imagens && produto.imagens.length > 0 ? `
+        <div class="image-thumbnails" id="imageThumbnails">
+            ${produto.imagens.map((img, index) => `
+                <img src="${img}" class="thumbnail ${index === 0 ? 'active' : ''}" 
+                     onclick="goToImage(${index})" loading="lazy">
+            `).join('')}
+        </div>
+    ` : '';
+    
+    // Especificações
+    const specsHTML = produto.especificacoes ? `
+        <div class="product-specs">
+            <h4>📋 Especificações</h4>
+            <div class="specs-grid">
+                ${Object.entries(produto.especificacoes).map(([key, value]) => `
+                    <div class="spec-item">
+                        <div>• ${key.charAt(0).toUpperCase() + key.slice(1)}:</div>
+                        <div><strong>${value}</strong></div>
+                    </div>
+                `).join('')}
+            </div>
+        </div>
+    ` : '';
+    
+    modal.innerHTML = `
+        <div class="details-content">
+            <button class="close-modal" onclick="closeModal('detailsModal')">×</button>
+            
+            ${carouselHTML}
+            ${thumbnailsHTML}
+            
+            <div class="product-details">
+                <h2>${produto.nome}</h2>
+                
+                <div class="product-details-price">
+                    R$ ${produto.preco.toFixed(2).replace('.', ',')}
+                    ${hasDiscount ? 
+                        `<span style="font-size: 18px; color: #999; text-decoration: line-through; margin-left: 10px;">
+                            De: R$ ${produto.precoOriginal.toFixed(2).replace('.', ',')}
+                        </span>` : ''
+                    }
+                </div>
+                
+                <div class="stock-info ${stockClass}" style="display: inline-block; padding: 8px 16px;">
+                    ${stockText}
+                </div>
+                
+                <p class="product-description">${produto.descricao}</p>
+                
+                ${specsHTML}
+                
+                <div style="margin-top: 25px;">
+                    ${produto.estoque > 0 ? 
+                        `<button onclick="addToCart('${produto.id}'); showNotification('${produto.nome} adicionado ao carrinho!', 'success')" 
+                                style="width: 100%; padding: 16px; background: var(--primary-color); color: white; border: none; border-radius: var(--border-radius); font-weight: bold; cursor: pointer; font-size: 16px; transition: var(--transition);">
+                            🛒 Adicionar ao Carrinho
+                        </button>` :
+                        `<div style="text-align: center; padding: 16px; background: #f8d7da; color: #721c24; border-radius: var(--border-radius); font-size: 15px;">
+                            🔴 Produto temporariamente esgotado
+                        </div>`
+                    }
+                </div>
+            </div>
+        </div>
+    `;
+    
+    modal.classList.add('active');
+    document.body.style.overflow = 'hidden';
+    
+    if (produto.imagens && produto.imagens.length > 0) {
+        initCarousel();
+    }
+}
+
+// Funções do carrossel
+function initCarousel() {
+    if (autoScrollInterval) clearInterval(autoScrollInterval);
+    
+    autoScrollInterval = setInterval(() => {
+        nextImage();
+    }, 4000);
+    
+    updateCarousel();
+}
+
+function nextImage() {
+    const produto = produtos.find(p => p.id === currentProductId);
+    if (!produto || !produto.imagens || produto.imagens.length === 0) return;
+    
+    currentCarouselIndex = (currentCarouselIndex + 1) % produto.imagens.length;
+    updateCarousel();
+    resetAutoScroll();
+}
+
+function prevImage() {
+    const produto = produtos.find(p => p.id === currentProductId);
+    if (!produto || !produto.imagens || produto.imagens.length === 0) return;
+    
+    currentCarouselIndex = (currentCarouselIndex - 1 + produto.imagens.length) % produto.imagens.length;
+    updateCarousel();
+    resetAutoScroll();
+}
+
+function goToImage(index) {
+    currentCarouselIndex = index;
+    updateCarousel();
+    resetAutoScroll();
+}
+
+function updateCarousel() {
+    const carouselImages = document.getElementById('carouselImages');
+    const indicators = document.querySelectorAll('.carousel-indicator');
+    const thumbnails = document.querySelectorAll('.thumbnail');
+    
+    if (carouselImages) {
+        carouselImages.style.transform = `translateX(-${currentCarouselIndex * 100}%)`;
+    }
+    
+    indicators.forEach((indicator, index) => {
+        indicator.classList.toggle('active', index === currentCarouselIndex);
+    });
+    
+    thumbnails.forEach((thumbnail, index) => {
+        thumbnail.classList.toggle('active', index === currentCarouselIndex);
+    });
+}
+
+function resetAutoScroll() {
+    if (autoScrollInterval) {
+        clearInterval(autoScrollInterval);
+        autoScrollInterval = setInterval(() => {
+            nextImage();
+        }, 4000);
+    }
+}
+
+function closeModal(modalId) {
+    if (autoScrollInterval) {
+        clearInterval(autoScrollInterval);
+        autoScrollInterval = null;
+    }
+    
+    document.getElementById(modalId).classList.remove('active');
+    document.body.style.overflow = '';
+}
+
+function closeAllModals() {
+    closeModal('detailsModal');
+    closeModal('checkoutModal');
+    document.getElementById('cartModal').classList.remove('active');
+    document.body.style.overflow = '';
+}
+
+// ============================================
+// CHECKOUT E FINALIZAÇÃO
+// ============================================
+
+function openCheckout() {
+    if (carrinho.length === 0) {
+        showNotification('Carrinho vazio! Adicione produtos primeiro.', 'warning');
+        return;
+    }
+    
+    const modal = document.getElementById('checkoutModal');
+    const form = document.getElementById('checkoutForm');
+    
+    const subtotal = carrinho.reduce((sum, item) => sum + (item.preco * item.quantidade), 0);
+    const frete = clienteInfo.entrega === 'padrao' ? 9.90 : 19.90;
+    const total = subtotal + frete;
+    
+    form.innerHTML = `
+        <div class="order-summary">
+            <h4>🛒 Resumo do Pedido</h4>
+            ${carrinho.map(item => `
+                <div class="order-item">
+                    <span>${item.quantidade}x ${item.nome}</span>
+                    <span>R$ ${(item.preco * item.quantidade).toFixed(2).replace('.', ',')}</span>
+                </div>
+            `).join('')}
+            <div class="order-item">
+                <span>Subtotal</span>
+                <span>R$ ${subtotal.toFixed(2).replace('.', ',')}</span>
+            </div>
+            <div class="order-item">
+                <span>Frete (${clienteInfo.entrega === 'expressa' ? 'Expressa' : 'Padrão'})</span>
+                <span>R$ ${frete.toFixed(2).replace('.', ',')}</span>
+            </div>
+            <div class="order-total">
+                <span>TOTAL</span>
+                <span>R$ ${total.toFixed(2).replace('.', ',')}</span>
+            </div>
+        </div>
+        
+        <div class="form-group">
+            <label for="nome">👤 Nome Completo *</label>
+            <input type="text" id="nome" value="${clienteInfo.nome}" placeholder="Digite seu nome completo" required>
+        </div>
+        
+        <div class="form-group">
+            <label for="telefone">📱 Telefone/WhatsApp *</label>
+            <input type="tel" id="telefone" value="${clienteInfo.telefone}" placeholder="(00) 00000-0000" required>
+        </div>
+        
+        <div class="form-group">
+            <label for="email">📧 E-mail</label>
+            <input type="email" id="email" value="${clienteInfo.email}" placeholder="seuemail@exemplo.com">
+        </div>
+        
+        <div class="form-group">
+            <label for="endereco">🏠 Endereço de Entrega *</label>
+            <textarea id="endereco" placeholder="Rua, Número, Bairro, Cidade - Estado, CEP" required>${clienteInfo.endereco}</textarea>
+        </div>
+        
+        <div class="form-group">
+            <label>💳 Forma de Pagamento *</label>
+            <div class="payment-methods">
+                <div class="payment-option active" onclick="selectPayment('pix')">
+                    <div style="display: flex; align-items: center; gap: 10px;">
+                        <div class="payment-icon">🏦</div>
+                        <div>
+                            <strong>PIX</strong>
+                            <div style="font-size: 12px; color: #666;">Pagamento instantâneo</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="form-group">
+            <label>🚚 Tipo de Entrega *</label>
+            <div class="delivery-options">
+                <div class="delivery-option ${clienteInfo.entrega === 'padrao' ? 'active' : ''}" onclick="selectDelivery('padrao')">
+                    <div>
+                        <strong>Entrega Padrão</strong>
+                        <div style="font-size: 13px; color: #666;">Entrega em 3-5 dias úteis</div>
+                    </div>
+                    <span class="delivery-price">R$ 9,90</span>
+                </div>
+                <div class="delivery-option ${clienteInfo.entrega === 'expressa' ? 'active' : ''}" onclick="selectDelivery('expressa')">
+                    <div>
+                        <strong>Entrega Expressa</strong>
+                        <div style="font-size: 13px; color: #666;">Entrega em 1-2 dias úteis</div>
+                    </div>
+                    <span class="delivery-price">R$ 19,90</span>
+                </div>
+            </div>
+        </div>
+        
+        <div class="form-group">
+            <label for="observacoes">📝 Observações</label>
+            <textarea id="observacoes" placeholder="Observações sobre o pedido, ponto de referência, etc.">${clienteInfo.observacoes}</textarea>
+        </div>
+        
+        <button class="submit-order-btn" onclick="sendWhatsAppOrder()">
+            📱 Enviar Pedido pelo WhatsApp
+        </button>
+        
+        <p style="text-align: center; margin-top: 15px; color: #666; font-size: 13px;">
+            Após enviar o pedido, você será direcionado para o WhatsApp para finalizar a compra.
+        </p>
+    `;
+    
+    modal.classList.add('active');
+    document.body.style.overflow = 'hidden';
+    toggleCart();
+}
+
+function closeCheckout() {
+    closeModal('checkoutModal');
+}
+
+function selectPayment(method) {
+    clienteInfo.pagamento = method;
+    document.querySelectorAll('.payment-option').forEach(option => {
+        option.classList.remove('active');
+    });
+    event.target.closest('.payment-option').classList.add('active');
+}
+
+function selectDelivery(type) {
+    clienteInfo.entrega = type;
+    document.querySelectorAll('.delivery-option').forEach(option => {
+        option.classList.remove('active');
+    });
+    event.target.closest('.delivery-option').classList.add('active');
+    openCheckout(); // Recarregar para atualizar valores
+}
+
+function sendWhatsAppOrder() {
+    // Coletar dados do formulário
+    clienteInfo.nome = document.getElementById('nome').value.trim();
+    clienteInfo.telefone = document.getElementById('telefone').value.trim();
+    clienteInfo.email = document.getElementById('email').value.trim();
+    clienteInfo.endereco = document.getElementById('endereco').value.trim();
+    clienteInfo.observacoes = document.getElementById('observacoes').value.trim();
+    
+    // Validação
+    if (!clienteInfo.nome || !clienteInfo.telefone || !clienteInfo.endereco) {
+        showNotification('Preencha todos os campos obrigatórios!', 'error');
+        return;
+    }
+    
+    // Validar telefone
+    const phoneRegex = /^(\d{10,11})|(\(\d{2}\)\s?\d{4,5}-\d{4})$/;
+    if (!phoneRegex.test(clienteInfo.telefone.replace(/\D/g, ''))) {
+        showNotification('Digite um telefone válido!', 'error');
+        return;
+    }
+    
+    // Calcular totais
+    const subtotal = carrinho.reduce((sum, item) => sum + (item.preco * item.quantidade), 0);
+    const frete = clienteInfo.entrega === 'padrao' ? 9.90 : 19.90;
+    const total = subtotal + frete;
+    
+    // Criar mensagem
+    let message = `*🛒 NOVO PEDIDO - JordanWearStore*\n\n`;
+    message += `*Cliente:* ${clienteInfo.nome}\n`;
+    message += `*Telefone:* ${clienteInfo.telefone}\n`;
+    if (clienteInfo.email) message += `*E-mail:* ${clienteInfo.email}\n`;
+    message += `*Endereço:*\n${clienteInfo.endereco}\n\n`;
+    message += `*Pagamento:* PIX\n`;
+    message += `*Entrega:* ${clienteInfo.entrega === 'expressa' ? 'Expressa (1-2 dias úteis)' : 'Padrão (3-5 dias úteis)'}\n`;
+    message += `*Frete:* R$ ${frete.toFixed(2).replace('.', ',')}\n\n`;
+    
+    message += `*ITENS DO PEDIDO:*\n`;
+    carrinho.forEach(item => {
+        message += `• ${item.quantidade}x ${item.nome} - R$ ${(item.preco * item.quantidade).toFixed(2).replace('.', ',')}\n`;
+    });
+    
+    message += `\n*RESUMO DE VALORES:*\n`;
+    message += `Subtotal: R$ ${subtotal.toFixed(2).replace('.', ',')}\n`;
+    message += `Frete: R$ ${frete.toFixed(2).replace('.', ',')}\n`;
+    message += `*TOTAL: R$ ${total.toFixed(2).replace('.', ',')}*\n`;
+    
+    if (clienteInfo.observacoes) {
+        message += `\n*Observações do cliente:*\n${clienteInfo.observacoes}\n`;
+    }
+    
+    message += `\n📅 *Data do pedido:* ${new Date().toLocaleString('pt-BR')}`;
+    message += `\n🆔 *ID do pedido:* ${Date.now().toString(36).toUpperCase()}`;
+    
+    // Atualizar estoque
+    carrinho.forEach(item => {
+        const produtoIndex = produtos.findIndex(p => p.id === item.id);
+        if (produtoIndex !== -1) {
+            produtos[produtoIndex].estoque -= item.quantidade;
+        }
+    });
+    
+    // Limpar carrinho
+    carrinho = [];
+    saveCart();
+    updateCartDisplay();
+    closeCheckout();
+    renderAllProducts();
+    
+    // Codificar mensagem para URL
+    const encodedMessage = encodeURIComponent(message);
+    const phoneNumber = '555181875780'; // Número do WhatsApp
+    const whatsappURL = `https://wa.me/${phoneNumber}?text=${encodedMessage}`;
+    
+    // Abrir WhatsApp
+    window.open(whatsappURL, '_blank');
+    
+    showNotification('Pedido enviado com sucesso! Verifique o WhatsApp.', 'success');
+    
+    // Resetar informações do cliente
+    clienteInfo = {
+        nome: '', telefone: '', email: '', endereco: '',
+        pagamento: 'pix', entrega: 'padrao', observacoes: ''
+    };
+}
+
+// ============================================
+// NOTIFICAÇÕES
+// ============================================
+
+function showNotification(message, type = 'success') {
+    // Remover notificações anteriores
+    const existingNotifications = document.querySelectorAll('.notification');
+    existingNotifications.forEach(notification => notification.remove());
+    
+    // Criar nova notificação
+    const notification = document.createElement('div');
+    notification.className = `notification ${type}`;
+    
+    let icon = '✅';
+    if (type === 'error') icon = '❌';
+    if (type === 'warning') icon = '⚠️';
+    
+    notification.innerHTML = `
+        <div class="notification-icon">${icon}</div>
+        <div>${message}</div>
+    `;
+    
+    document.body.appendChild(notification);
+    
+    // Remover após 3 segundos
+    setTimeout(() => {
+        if (notification.parentNode) {
+            notification.style.animation = 'slideOutRight 0.3s ease';
+            setTimeout(() => notification.remove(), 300);
+        }
+    }, 3000);
+}
+
+// ============================================
+// FALLBACK E INICIALIZAÇÃO FINAL
+// ============================================
+
+// Garantir que os produtos sejam renderizados
+setTimeout(() => {
+    if (!document.getElementById('allProducts').innerHTML) {
+        renderAllProducts();
+    }
+}, 100);
+
+// Prevenir recarregamento acidental da página com carrinho não salvo
+window.addEventListener('beforeunload', function(e) {
+    if (carrinho.length > 0) {
+        saveCart();
+    }
+});
+</script>
+</body>
+</html>
