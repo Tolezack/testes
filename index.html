@@ -2,7 +2,7 @@
 <html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes, viewport-fit=cover">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Jordan Store - Loja Oficial de Roupas Jordan</title>
     <meta name="description" content="Loja oficial de camisas e calças Jordan. Compre online com frete calculado por CEP e entrega para todo Brasil.">
     <style>
@@ -16,8 +16,6 @@
             --border-radius: 12px;
             --box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
             --transition: all 0.3s ease;
-            --safe-area-top: env(safe-area-inset-top);
-            --safe-area-bottom: env(safe-area-inset-bottom);
         }
 
         * {
@@ -25,7 +23,6 @@
             padding: 0;
             box-sizing: border-box;
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            max-width: 100%;
         }
 
         body {
@@ -33,16 +30,13 @@
             color: var(--text-color);
             line-height: 1.6;
             overflow-x: hidden;
-            width: 100%;
-            position: relative;
-            padding-top: 60px; /* Espaço para o header fixo */
         }
 
-        /* MENU HAMBURGER - ESTILO BASE */
+        /* MENU HAMBURGER */
         .hamburger-menu {
             position: fixed;
-            top: max(20px, var(--safe-area-top));
-            left: 15px;
+            top: 33px;
+            left: 20px;
             z-index: 1001;
             background: var(--primary-color);
             width: 50px;
@@ -56,7 +50,6 @@
             box-shadow: var(--box-shadow);
             transition: var(--transition);
             border: 2px solid rgba(255, 255, 255, 0.1);
-            overflow: hidden;
         }
 
         .hamburger-menu:hover {
@@ -72,7 +65,6 @@
             margin: 3px 0;
             border-radius: 2px;
             transition: var(--transition);
-            display: block;
         }
 
         .hamburger-menu:hover .hamburger-line {
@@ -178,7 +170,6 @@
             border-left: 4px solid transparent;
             transition: var(--transition);
             cursor: pointer;
-            min-height: 60px;
         }
 
         .sidebar-item:hover {
@@ -200,60 +191,45 @@
             text-align: center;
         }
 
-        /* HEADER PRINCIPAL - CORREÇÃO PARA MOBILE */
+        /* HEADER PRINCIPAL */
         header {
             background: var(--primary-color);
             color: white;
             padding: 16px 24px;
             display: flex;
-            justify-content: space-between;
+            justify-content: center;
             align-items: center;
-            position: fixed;
+            position: sticky;
             top: 0;
-            left: 0;
-            right: 0;
             z-index: 998;
             box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-            padding-top: max(16px, var(--safe-area-top));
-            min-height: 60px;
-            width: 100%;
         }
 
         .logo-container {
             display: flex;
             align-items: center;
             justify-content: center;
-            position: absolute;
-            left: 50%;
-            transform: translateX(-50%);
-            height: 100%;
+            width: 100%;
         }
 
         .logo-img {
             height: 90px;
             object-fit: contain;
             max-width: 200px;
-            transition: var(--transition);
         }
 
         .cart-icon {
-            position: relative;
+            position: absolute;
+            right: 24px;
             cursor: pointer;
             font-size: 24px;
             padding: 8px;
             border-radius: 50%;
             transition: var(--transition);
-            background: rgba(255, 255, 255, 0.1);
-            width: 50px;
-            height: 50px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin-left: auto;
         }
 
         .cart-icon:hover {
-            background: rgba(255, 255, 255, 0.2);
+            background: rgba(255, 255, 255, 0.1);
             transform: scale(1.05);
         }
 
@@ -275,16 +251,21 @@
 
         /* BANNER */
         .banner-container {
-            width: 100%;
+            width: 110%;
             overflow: hidden;
             position: relative;
             height: 500px;
             margin-bottom: 30px;
-            border-radius: 0;
+        }
+
+        @media (max-width: 768px) {
+            .banner-container {
+                height: 300px;
+            }
         }
 
         .banner-slide {
-            width: 100%;
+            width: 110%;
             height: 100%;
             position: absolute;
             top: 0;
@@ -327,8 +308,6 @@
             padding: 0 20px;
             max-width: 1200px;
             margin: 0 auto 50px;
-            width: 100%;
-            box-sizing: border-box;
         }
 
         .home-intro {
@@ -427,7 +406,7 @@
             padding: 12px 20px 12px 45px;
             border: 2px solid #e0e0e0;
             border-radius: var(--border-radius);
-            font-size: 16px;
+            font-size: 14px;
             transition: var(--transition);
             background: white;
         }
@@ -450,7 +429,7 @@
             padding: 12px 20px;
             border: 2px solid #e0e0e0;
             border-radius: var(--border-radius);
-            font-size: 16px;
+            font-size: 14px;
             background: white;
             cursor: pointer;
             transition: var(--transition);
@@ -470,6 +449,27 @@
             align-items: start;
         }
 
+        @media (max-width: 1024px) {
+            .products-grid {
+                grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+                gap: 20px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .products-grid {
+                grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+                gap: 18px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .products-grid {
+                grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+                gap: 15px;
+            }
+        }
+
         /* PRODUCT CARD */
         .product-card {
             background: white;
@@ -482,7 +482,6 @@
             box-shadow: var(--box-shadow);
             display: flex;
             flex-direction: column;
-            margin: 0;
         }
 
         .product-card:hover {
@@ -612,7 +611,6 @@
             align-items: center;
             justify-content: center;
             gap: 5px;
-            min-height: 44px;
         }
 
         .buy-btn {
@@ -694,6 +692,12 @@
             height: 400px;
             overflow: hidden;
             border-radius: 16px 16px 0 0;
+        }
+
+        @media (max-width: 768px) {
+            .image-carousel {
+                height: 300px;
+            }
         }
 
         .carousel-images {
@@ -1078,7 +1082,6 @@
             align-items: center;
             justify-content: center;
             gap: 10px;
-            min-height: 54px;
         }
 
         .checkout-button:hover {
@@ -1187,7 +1190,7 @@
             padding: 14px;
             border: 2px solid #e0e0e0;
             border-radius: var(--border-radius);
-            font-size: 16px;
+            font-size: 14px;
             transition: var(--transition);
             background: white;
         }
@@ -1217,7 +1220,7 @@
             padding: 12px;
             border: 2px solid #e0e0e0;
             border-radius: var(--border-radius);
-            font-size: 16px;
+            font-size: 14px;
         }
         
         .cep-input:focus {
@@ -1235,7 +1238,6 @@
             font-weight: 600;
             transition: var(--transition);
             white-space: nowrap;
-            min-height: 44px;
         }
         
         .calculate-frete-btn:hover {
@@ -1271,7 +1273,6 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            min-height: 60px;
         }
         
         .frete-option:hover {
@@ -1386,7 +1387,6 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            min-height: 60px;
         }
 
         .payment-option:hover,
@@ -1450,7 +1450,6 @@
             justify-content: center;
             gap: 10px;
             margin-top: 20px;
-            min-height: 54px;
         }
 
         .submit-order-btn:hover {
@@ -1462,7 +1461,7 @@
         /* NOTIFICAÇÃO */
         .notification {
             position: fixed;
-            top: 80px;
+            top: 20px;
             right: 20px;
             background: var(--primary-color);
             color: white;
@@ -1574,563 +1573,89 @@
             text-align: center;
         }
 
-        /* ============================================
-           RESPONSIVE DESIGN - TELAS GRANDES (PC)
-           ============================================ */
-        @media (min-width: 1025px) {
-            body {
-                padding-top: 0;
-            }
-            
-            .hamburger-menu {
-                /* MENU HAMBURGUER VISÍVEL NO PC */
-                display: flex !important;
-                top: 30px;
-                left: 30px;
-                width: 50px;
-                height: 50px;
-            }
-            
+        /* RESPONSIVE */
+        @media (max-width: 768px) {
             header {
-                position: sticky;
-                padding: 20px 40px;
-                min-height: 100px;
+                padding: 12px 16px;
             }
-            
-            .logo-img {
-                height: 100px;
-                max-width: 250px;
-            }
-            
-            .products-grid {
-                grid-template-columns: repeat(4, 1fr) !important;
-                gap: 30px;
-            }
-            
-            .product-card {
-                height: 450px;
-            }
-            
-            .product-image-container {
-                height: 250px;
-            }
-            
-            .feature-card {
-                min-height: 250px;
-                padding: 35px 30px;
-            }
-            
-            .home-intro h1 {
-                font-size: 42px;
-            }
-            
-            .home-intro p {
-                font-size: 20px;
-                max-width: 900px;
-            }
-            
-            .banner-container {
-                height: 600px;
-                border-radius: 20px;
-                margin: 0 auto 50px;
-                width: 100%;
-                max-width: 1400px;
-            }
-            
-            /* Sidebar mais larga no PC */
-            .sidebar-menu {
-                width: 350px;
-                left: -350px;
-            }
-            
-            .logo-container {
-                position: relative;
-                left: auto;
-                transform: none;
-            }
-            
-            .cart-icon {
-                margin-left: 0;
-            }
-            
-            .cart-count {
-                width: 24px;
-                height: 24px;
-                font-size: 13px;
-            }
-            
-            .notification {
-                top: 20px;
-            }
-        }
 
-        /* ============================================
-           RESPONSIVE DESIGN - TABLETS
-           ============================================ */
-        @media (max-width: 1024px) and (min-width: 769px) {
-            body {
-                padding-top: 60px;
+            .logo-img {
+                height: 35px;
+                max-width: 180px;
             }
-            
+
             .hamburger-menu {
                 top: 15px;
-                left: 20px;
-                width: 50px;
-                height: 50px;
+                left: 15px;
+                width: 45px;
+                height: 45px;
             }
-            
-            .products-grid {
-                grid-template-columns: repeat(3, 1fr);
-                gap: 25px;
-            }
-            
-            .product-card {
-                height: 420px;
-            }
-            
-            .product-image-container {
-                height: 220px;
-            }
-            
-            .home-section {
-                padding: 0 30px;
-            }
-            
-            .features-grid {
-                grid-template-columns: repeat(2, 1fr);
-                gap: 25px;
-            }
-            
-            .banner-container {
-                height: 400px;
-            }
-            
-            .logo-img {
-                height: 80px;
-            }
-        }
 
-        /* ============================================
-           RESPONSIVE DESIGN - CELULARES
-           ============================================ */
-        @media (max-width: 768px) {
-            /* HEADER FIXO NO TOPO */
-            body {
-                padding-top: 60px;
-            }
-            
-            header {
-                display: flex;
-                justify-content: space-between;
-                align-items: center;
-                padding: 12px 15px !important;
-                min-height: 60px !important;
-                width: 100%;
-            }
-            
-            /* HAMBURGER NO CANTO ESQUERDO */
-            .hamburger-menu {
-                position: relative !important;
-                top: auto !important;
-                left: auto !important;
-                transform: none !important;
-                width: 75px !important;
-                height: 45px !important;
-                margin: 0 !important;
-                order: 1;
-            }
-            
-            /* LOGO NO CENTRO */
-            .logo-container {
-                position: absolute !important;
-                left: 50% !important;
-                transform: translateX(-50%) !important;
-                width: auto !important;
-                padding: 0 !important;
-                margin: 0 !important;
-                order: 2;
-            }
-            
-            .logo-img {
-                height: 45px !important;
-                max-width: 140px !important;
-                margin: 0 !important;
-            }
-            
-            /* CARRINHO NO CANTO DIREITO */
             .cart-icon {
-                position: relative !important;
-                top: auto !important;
-                right: auto !important;
-                transform: none !important;
-                margin: 0 !important;
-                width: 45px !important;
-                height: 45px !important;
-                font-size: 18px !important;
-                order: 3;
+                right: 16px;
             }
-            
-            .cart-count {
-                width: 18px !important;
-                height: 18px !important;
-                font-size: 10px !important;
+
+            .sidebar-menu {
+                width: 280px;
             }
-            
-            /* CORREÇÃO DO BANNER */
-            .home-section {
-                padding: 0 !important;
-                margin-top: 0 !important;
-                width: 100% !important;
-            }
-            
+
             .banner-container {
-                width: 100% !important;
-                height: 220px !important;
-                margin: 0 0 20px 0 !important;
-                border-radius: 0 !important;
+                height: 300px;
             }
-            
-            .banner-slide {
-                width: 100% !important;
-                height: 100% !important;
-            }
-            
-            .banner-dots {
-                bottom: 10px !important;
-            }
-            
-            .banner-dot {
-                width: 10px !important;
-                height: 10px !important;
-            }
-            
-            /* CORREÇÃO DAS FEATURES */
-            .features-grid {
-                grid-template-columns: 1fr !important;
-                gap: 15px !important;
-                margin: 20px 15px !important;
-                padding: 0 !important;
-            }
-            
-            .feature-card {
-                min-height: 150px !important;
-                padding: 20px 15px !important;
-            }
-            
-            .feature-icon {
-                width: 50px !important;
-                height: 50px !important;
-                font-size: 25px !important;
-                margin-bottom: 15px !important;
-            }
-            
-            .feature-card h3 {
-                font-size: 16px !important;
-                margin-bottom: 10px !important;
-            }
-            
-            .feature-card p {
-                font-size: 14px !important;
-            }
-            
-            /* CORREÇÃO DOS FILTROS */
-            .filters {
-                flex-direction: column !important;
-                margin: 20px 15px 15px 15px !important;
-                gap: 10px !important;
-                padding: 0 !important;
-            }
-            
-            .search-box {
-                width: 100% !important;
-                min-width: 100% !important;
-            }
-            
-            .search-input {
-                padding: 12px 15px 12px 40px !important;
-                font-size: 16px !important;
-            }
-            
-            .sort-select {
-                width: 100% !important;
-                padding: 12px 15px !important;
-                font-size: 16px !important;
-            }
-            
-            /* CORREÇÃO DA HOME INTRO */
-            .home-intro {
-                padding: 20px 15px !important;
-                margin-bottom: 20px !important;
-                text-align: center !important;
-            }
-            
+
             .home-intro h1 {
-                font-size: 22px !important;
-                margin-bottom: 15px !important;
+                font-size: 28px;
             }
-            
+
             .home-intro p {
-                font-size: 14px !important;
-                line-height: 1.5 !important;
+                font-size: 16px;
             }
-            
-            /* CORREÇÃO DOS PRODUTOS */
-            .products-grid {
-                grid-template-columns: repeat(2, 1fr) !important;
-                gap: 12px !important;
-                padding: 0 15px !important;
-                margin: 0 !important;
-            }
-            
-            .product-card {
-                height: 360px !important;
-                margin: 0 !important;
-            }
-            
-            .product-image-container {
-                height: 160px !important;
-            }
-            
-            .product-info {
-                padding: 12px !important;
-            }
-            
-            .product-name {
-                font-size: 13px !important;
-                height: 36px !important;
-                margin-bottom: 6px !important;
-            }
-            
-            .product-price {
-                font-size: 16px !important;
-                margin-bottom: 6px !important;
-            }
-            
-            .product-buttons {
-                flex-direction: column !important;
-                gap: 6px !important;
-            }
-            
-            .product-btn {
-                padding: 10px !important;
-                font-size: 12px !important;
-                width: 100% !important;
-                min-height: 40px !important;
-            }
-            
-            .stock-info {
-                font-size: 10px !important;
-                padding: 3px 8px !important;
-                margin-bottom: 8px !important;
-            }
-            
-            /* CORREÇÃO DO MODAL DE DETALHES */
-            .details-content {
-                width: 95% !important;
-                max-height: 85vh !important;
-            }
-            
-            .image-carousel {
-                height: 250px !important;
-            }
-            
-            .product-details {
-                padding: 20px 15px !important;
-            }
-            
-            .product-details h2 {
-                font-size: 18px !important;
-            }
-            
-            .product-details-price {
-                font-size: 22px !important;
-            }
-            
-            /* CORREÇÃO DO CARRINHO */
-            .cart-modal {
-                max-width: 100% !important;
-            }
-            
-            .cart-item {
-                padding: 12px 0 !important;
-            }
-            
-            .cart-item-image {
-                width: 60px !important;
-                height: 60px !important;
-            }
-            
-            .cart-item-actions {
-                flex-direction: column !important;
-                align-items: flex-start !important;
-                gap: 8px !important;
-            }
-            
-            .quantity-control {
-                align-self: flex-start !important;
-            }
-            
-            /* CORREÇÃO DO CHECKOUT */
-            .checkout-container {
-                width: 95% !important;
-            }
-            
-            .checkout-form {
-                padding: 20px 15px !important;
-            }
-            
-            .order-summary {
-                padding: 15px !important;
-            }
-            
-            /* CORREÇÃO DO FOOTER */
-            footer {
-                padding: 30px 15px !important;
-                margin-top: 30px !important;
-            }
-            
-            .footer-text {
-                font-size: 14px !important;
-            }
-            
-            .footer-bottom {
-                font-size: 12px !important;
-            }
-            
-            /* CORREÇÃO DO CEP FORM */
-            .cep-form {
-                flex-direction: column !important;
-                gap: 8px !important;
-            }
-            
-            .calculate-frete-btn {
-                width: 100% !important;
-            }
-            
-            /* OTIMIZAÇÃO PARA TOUCH */
-            .product-card:hover,
-            .feature-card:hover,
-            .cart-icon:hover,
-            .hamburger-menu:hover,
-            .checkout-button:hover,
-            .submit-order-btn:hover {
-                transform: none !important;
+
+            .features-grid {
+                grid-template-columns: 1fr;
             }
         }
 
-        /* ============================================
-           RESPONSIVE DESIGN - CELULARES PEQUENOS
-           ============================================ */
         @media (max-width: 480px) {
-            body {
-                padding-top: 55px;
+            .search-box {
+                min-width: 100%;
             }
-            
-            header {
-                padding: 10px 12px !important;
-                min-height: 55px !important;
+
+            .filters {
+                flex-direction: column;
+                align-items: stretch;
             }
-            
-            .products-grid {
-                grid-template-columns: repeat(2, 1fr) !important;
-                gap: 10px !important;
+
+            .cart-modal {
+                max-width: 100%;
             }
-            
-            .product-card {
-                height: 340px !important;
+
+            .sidebar-menu {
+                width: 100%;
+                left: -100%;
             }
-            
-            .product-image-container {
-                height: 140px !important;
-            }
-            
-            .hamburger-menu,
-            .cart-icon {
-                width: 40px !important;
-                height: 40px !important;
-            }
-            
-            .hamburger-line {
-                width: 18px !important;
-                height: 2px !important;
-            }
-            
-            .logo-img {
-                height: 40px !important;
-                max-width: 120px !important;
-            }
-            
+
             .banner-container {
-                height: 180px !important;
+                height: 200px;
             }
-            
-            .home-intro h1 {
-                font-size: 20px !important;
-            }
-            
-            .home-intro p {
-                font-size: 13px !important;
-            }
-            
+
             .feature-card {
-                min-height: 140px !important;
-                padding: 15px 12px !important;
+                padding: 20px 15px;
+                min-height: 200px;
             }
-            
-            .product-badge {
-                font-size: 9px !important;
-                padding: 3px 8px !important;
+
+            .feature-icon {
+                width: 60px;
+                height: 60px;
+                font-size: 30px;
             }
-            
-            .specs-grid {
-                grid-template-columns: 1fr !important;
-                gap: 8px !important;
-            }
-            
-            .notification {
-                max-width: 90% !important;
-                right: 5% !important;
-                left: 5% !important;
+
+            .cep-form {
+                flex-direction: column;
             }
         }
 
-        /* ============================================
-           OTIMIZAÇÃO PARA TOUCH SCREENS
-           ============================================ */
-        @media (hover: none) and (pointer: coarse) {
-            .product-card:hover {
-                transform: none !important;
-            }
-            
-            .feature-card:hover {
-                transform: none !important;
-            }
-            
-            .product-card:hover .product-image {
-                transform: none !important;
-            }
-            
-            .banner-dot,
-            .carousel-indicator {
-                width: 15px !important;
-                height: 15px !important;
-            }
-        }
-
-        /* ============================================
-           PREVENÇÃO DE ZOOM EM INPUTS NO IOS
-           ============================================ */
-        @media screen and (max-width: 768px) {
-            input,
-            select,
-            textarea {
-                font-size: 16px !important;
-            }
-        }
-
-        /* ============================================
-           SCROLLBAR
-           ============================================ */
+        /* SCROLLBAR */
         ::-webkit-scrollbar {
             width: 8px;
             height: 8px;
@@ -2150,9 +1675,7 @@
             background: #a8a8a8;
         }
 
-        /* ============================================
-           DARK MODE
-           ============================================ */
+        /* DARK MODE */
         .dark-mode {
             background: #121212;
             color: #ffffff;
@@ -2463,60 +1986,6 @@
 
     <script>
         // ============================================
-        // DETECTAR DISPOSITIVO E APLICAR AJUSTES
-        // ============================================
-        function detectDeviceAndApplyFixes() {
-            const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
-            const isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent);
-            const isTablet = /iPad|Tablet|Kindle|Samsung Tablet|Android.*Tablet/i.test(navigator.userAgent);
-            
-            if (isMobile || isTablet) {
-                document.body.classList.add('mobile-device');
-                
-                // Ajustar grid de produtos para mobile/tablet
-                const productsGrid = document.getElementById('allProducts');
-                if (productsGrid) {
-                    if (isTablet) {
-                        productsGrid.style.gridTemplateColumns = 'repeat(2, 1fr)';
-                    } else {
-                        productsGrid.style.gridTemplateColumns = 'repeat(2, 1fr)';
-                    }
-                    productsGrid.style.gap = '15px';
-                }
-                
-                // Correções específicas para iOS
-                if (isIOS) {
-                    // Corrigir altura da viewport
-                    function setVh() {
-                        const vh = window.innerHeight * 0.01;
-                        document.documentElement.style.setProperty('--vh', `${vh}px`);
-                    }
-                    
-                    setVh();
-                    window.addEventListener('resize', setVh);
-                    window.addEventListener('orientationchange', setVh);
-                    
-                    // Prevenir bounce scroll
-                    document.body.style.overscrollBehavior = 'none';
-                }
-                
-                // Otimizar para touch
-                document.querySelectorAll('.product-btn, .buy-btn, .details-btn, .quantity-btn, .carousel-btn').forEach(btn => {
-                    btn.style.minHeight = '44px';
-                });
-                
-            } else {
-                document.body.classList.add('desktop-device');
-                // Versão desktop - manter layout original
-                const productsGrid = document.getElementById('allProducts');
-                if (productsGrid) {
-                    productsGrid.style.gridTemplateColumns = 'repeat(4, 1fr)';
-                    productsGrid.style.gap = '30px';
-                }
-            }
-        }
-
-        // ============================================
         // DADOS DOS PRODUTOS (37 PRODUTOS)
         // ============================================
         const produtos = [
@@ -2638,7 +2107,7 @@
             '671': 'PA', '672': 'PA', '673': 'PA', '674': 'PA', '675': 'PA',
             '676': 'PA', '677': 'PA', '678': 'PA', '679': 'PA', '680': 'PA',
             '681': 'PA', '682': 'PA', '683': 'PA', '684': 'PA', '685': 'PA',
-            '686': 'PA', '687': 'PA', '688': 'PA', '590': 'PB', '581': 'PB',
+            '686': 'PA', '687': 'PA', '688': 'PA', '580': 'PB', '581': 'PB',
             '582': 'PB', '583': 'PB', '584': 'PB', '585': 'PB', '586': 'PB',
             '587': 'PB', '588': 'PB', '589': 'PB', '800': 'PR', '801': 'PR',
             '802': 'PR', '803': 'PR', '804': 'PR', '805': 'PR', '806': 'PR',
@@ -2830,7 +2299,6 @@
         // FUNÇÕES DE INICIALIZAÇÃO
         // ============================================
         document.addEventListener('DOMContentLoaded', function() {
-            detectDeviceAndApplyFixes();
             renderAllProducts();
             startBannerRotation();
             loadCart();
@@ -2882,16 +2350,6 @@
                 if (e.target.classList.contains('sidebar-overlay')) toggleSidebar();
                 if (e.target.classList.contains('cep-modal')) closeCepModal();
             });
-
-            // Prevenir zoom duplo em mobile
-            let lastTouchEnd = 0;
-            document.addEventListener('touchend', function(event) {
-                const now = (new Date()).getTime();
-                if (now - lastTouchEnd <= 300) {
-                    event.preventDefault();
-                }
-                lastTouchEnd = now;
-            }, false);
         }
 
         // ============================================
@@ -2905,10 +2363,8 @@
             overlay.classList.toggle('active');
             if (sidebar.classList.contains('active')) {
                 hamburger.style.opacity = '0.7';
-                document.body.style.overflow = 'hidden';
             } else {
                 hamburger.style.opacity = '1';
-                document.body.style.overflow = '';
             }
         }
 
@@ -3837,7 +3293,6 @@
         // FIM DO CÓDIGO
         // ============================================
         window.addEventListener('resize', function() {
-            detectDeviceAndApplyFixes();
             updateProductsDisplay();
         });
 
