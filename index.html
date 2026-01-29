@@ -35,6 +35,7 @@
             overflow-x: hidden;
             width: 100%;
             position: relative;
+            padding-top: 60px; /* Espaço para o header fixo */
         }
 
         /* MENU HAMBURGER - ESTILO BASE */
@@ -199,28 +200,33 @@
             text-align: center;
         }
 
-        /* HEADER PRINCIPAL */
+        /* HEADER PRINCIPAL - CORREÇÃO PARA MOBILE */
         header {
             background: var(--primary-color);
             color: white;
             padding: 16px 24px;
             display: flex;
-            justify-content: center;
+            justify-content: space-between;
             align-items: center;
-            position: sticky;
+            position: fixed;
             top: 0;
+            left: 0;
+            right: 0;
             z-index: 998;
             box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
             padding-top: max(16px, var(--safe-area-top));
-            min-height: 80px;
+            min-height: 60px;
+            width: 100%;
         }
 
         .logo-container {
             display: flex;
             align-items: center;
             justify-content: center;
-            width: 100%;
-            position: relative;
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+            height: 100%;
         }
 
         .logo-img {
@@ -231,10 +237,7 @@
         }
 
         .cart-icon {
-            position: absolute;
-            right: 24px;
-            top: 50%;
-            transform: translateY(-50%);
+            position: relative;
             cursor: pointer;
             font-size: 24px;
             padding: 8px;
@@ -246,11 +249,12 @@
             display: flex;
             align-items: center;
             justify-content: center;
+            margin-left: auto;
         }
 
         .cart-icon:hover {
             background: rgba(255, 255, 255, 0.2);
-            transform: translateY(-50%) scale(1.05);
+            transform: scale(1.05);
         }
 
         .cart-count {
@@ -1458,7 +1462,7 @@
         /* NOTIFICAÇÃO */
         .notification {
             position: fixed;
-            top: 20px;
+            top: 80px;
             right: 20px;
             background: var(--primary-color);
             color: white;
@@ -1574,6 +1578,10 @@
            RESPONSIVE DESIGN - TELAS GRANDES (PC)
            ============================================ */
         @media (min-width: 1025px) {
+            body {
+                padding-top: 0;
+            }
+            
             .hamburger-menu {
                 /* MENU HAMBURGUER VISÍVEL NO PC */
                 display: flex !important;
@@ -1581,6 +1589,12 @@
                 left: 30px;
                 width: 50px;
                 height: 50px;
+            }
+            
+            header {
+                position: sticky;
+                padding: 20px 40px;
+                min-height: 100px;
             }
             
             .logo-img {
@@ -1629,21 +1643,14 @@
                 left: -350px;
             }
             
-            /* Header ajustado para PC */
-            header {
-                padding: 20px 40px;
-                min-height: 100px;
-            }
-            
             .logo-container {
-                padding-left: 80px; /* Espaço para o hamburguer */
+                position: relative;
+                left: auto;
+                transform: none;
             }
             
             .cart-icon {
-                right: 40px;
-                width: 55px;
-                height: 55px;
-                font-size: 26px;
+                margin-left: 0;
             }
             
             .cart-count {
@@ -1651,14 +1658,22 @@
                 height: 24px;
                 font-size: 13px;
             }
+            
+            .notification {
+                top: 20px;
+            }
         }
 
         /* ============================================
            RESPONSIVE DESIGN - TABLETS
            ============================================ */
         @media (max-width: 1024px) and (min-width: 769px) {
+            body {
+                padding-top: 60px;
+            }
+            
             .hamburger-menu {
-                top: 25px;
+                top: 15px;
                 left: 20px;
                 width: 50px;
                 height: 50px;
@@ -1693,28 +1708,27 @@
             .logo-img {
                 height: 80px;
             }
-            
-            .logo-container {
-                padding-left: 70px;
-            }
         }
 
         /* ============================================
            RESPONSIVE DESIGN - CELULARES
            ============================================ */
         @media (max-width: 768px) {
-            /* CORREÇÃO CRÍTICA DO HEADER E BANNER */
-            header {
-                padding: 10px 15px !important;
-                min-height: 60px !important;
-                position: sticky !important;
-                top: 0 !important;
-                z-index: 999 !important;
-                display: flex !important;
-                align-items: center !important;
-                justify-content: space-between !important;
+            /* HEADER FIXO NO TOPO */
+            body {
+                padding-top: 60px;
             }
             
+            header {
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                padding: 12px 15px !important;
+                min-height: 60px !important;
+                width: 100%;
+            }
+            
+            /* HAMBURGER NO CANTO ESQUERDO */
             .hamburger-menu {
                 position: relative !important;
                 top: auto !important;
@@ -1723,17 +1737,18 @@
                 width: 45px !important;
                 height: 45px !important;
                 margin: 0 !important;
-                flex-shrink: 0 !important;
+                order: 1;
             }
             
+            /* LOGO NO CENTRO */
             .logo-container {
                 position: absolute !important;
                 left: 50% !important;
-                top: 50% !important;
-                transform: translate(-50%, -50%) !important;
+                transform: translateX(-50%) !important;
                 width: auto !important;
                 padding: 0 !important;
                 margin: 0 !important;
+                order: 2;
             }
             
             .logo-img {
@@ -1742,16 +1757,17 @@
                 margin: 0 !important;
             }
             
+            /* CARRINHO NO CANTO DIREITO */
             .cart-icon {
                 position: relative !important;
                 top: auto !important;
                 right: auto !important;
                 transform: none !important;
                 margin: 0 !important;
-                flex-shrink: 0 !important;
                 width: 45px !important;
                 height: 45px !important;
                 font-size: 18px !important;
+                order: 3;
             }
             
             .cart-count {
@@ -1760,7 +1776,7 @@
                 font-size: 10px !important;
             }
             
-            /* CORREÇÃO CRÍTICA DO BANNER - DEVE FICAR IMEDIATAMENTE APÓS O HEADER */
+            /* CORREÇÃO DO BANNER */
             .home-section {
                 padding: 0 !important;
                 margin-top: 0 !important;
@@ -1992,14 +2008,8 @@
             }
             
             /* OTIMIZAÇÃO PARA TOUCH */
-            .product-card:hover {
-                transform: none !important;
-            }
-            
-            .feature-card:hover {
-                transform: none !important;
-            }
-            
+            .product-card:hover,
+            .feature-card:hover,
             .cart-icon:hover,
             .hamburger-menu:hover,
             .checkout-button:hover,
@@ -2012,6 +2022,15 @@
            RESPONSIVE DESIGN - CELULARES PEQUENOS
            ============================================ */
         @media (max-width: 480px) {
+            body {
+                padding-top: 55px;
+            }
+            
+            header {
+                padding: 10px 12px !important;
+                min-height: 55px !important;
+            }
+            
             .products-grid {
                 grid-template-columns: repeat(2, 1fr) !important;
                 gap: 10px !important;
